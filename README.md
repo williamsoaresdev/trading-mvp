@@ -1,4 +1,11 @@
-# Trading MVP — ML + FastAPI (Python) + Executor (.NET) + Dashboard (Angular)
+# 🚀 Algorithmic Trading MVP
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/)
+[![.NET](https://img.shields.io/badge/.NET-8.0+-purple.svg)](https://dotnet.microsoft.com/)
+[![Angular](https://img.shields.io/badge/Angular-20+-red.svg)](https://angular.io/)
+
+A complete algorithmic trading system featuring **machine learning predictions**, **REST API**, **trading execution engine**, and **real-time monitoring dashboard**.
 
 Este MVP implementa um pipeline completo para robô de trading automatizado com **machine learning**, **execução automática** e **dashboard de monitoramento em tempo real**.
 
