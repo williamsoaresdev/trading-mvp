@@ -31,45 +31,70 @@ Este MVP implementa um pipeline completo para robô de trading automatizado com 
 - **Node.js 18+** e npm para o dashboard Angular
 - Conta/exchange para dados *live* (Binance — endpoints públicos bastam para dados; para ordens reais, inserir keys)
 
-## ⚡ Quick Start
+## Quick Start
 
-### 1️⃣ **Python: Treinar Modelo & API**
+### Option 1: Automated Setup (Recommended)
 
+**Windows:**
+```cmd
+setup.bat
+```
+
+**Linux/macOS:**
 ```bash
-cd python
-python -m venv .venv
+chmod +x setup.sh
+./setup.sh
+```
+
+**Cross-platform (Python):**
+```bash
+python setup.py
+```
+
+### Option 2: Manual Setup
+
+1. **Setup Environment** (first time only):
+```bash
+# Linux/macOS
+./setup.sh
 
 # Windows
-.venv\Scripts\activate
-# Linux/Mac  
-source .venv/bin/activate
+setup.bat
 
-pip install -r requirements.txt
-
-# Treinar modelo (10-15 min)
-python app/model_train.py --symbol BTC/USDT --timeframe 1h --years 1
-
-# Subir API FastAPI
-python run_server.py
-# API disponível em: http://localhost:8000
+# Cross-platform
+python setup.py
 ```
 
-### 2️⃣ **Angular: Dashboard Web**
+2. **Train the ML Model**:
+```bash
+cd python
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+python app/model_train.py --symbol BTC/USDT --timeframe 1h --years 1
+```
 
+3. **Start the Services**:
+
+Terminal 1 - FastAPI Server:
+```bash
+# Easy way (auto-activates virtual environment)
+python run_server.py
+
+# Manual way
+cd python
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+python -m uvicorn app.service:app --host 0.0.0.0 --port 8000 --reload
+```
+
+Terminal 2 - Angular Dashboard:
 ```bash
 cd trading-dashboard
-npm install
 npm start
-# Dashboard disponível em: http://localhost:4200
 ```
 
-### 3️⃣ **.NET: Trading Executor**
-
+Terminal 3 - .NET Trading Executor:
 ```bash
 cd dotnet/TradingExecutor
-dotnet build
 dotnet run
-# Executor consumindo API e executando ordens mock
 ```
 
 ## 📊 **Dashboard Features**
