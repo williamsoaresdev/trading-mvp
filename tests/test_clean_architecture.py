@@ -8,7 +8,7 @@ import os
 from pathlib import Path
 
 # Add paths
-sys.path.insert(0, str(Path(__file__).parent / "trading-intelligence"))
+sys.path.insert(0, str(Path(__file__).parent.parent / "trading-intelligence"))
 
 async def test_clean_architecture():
     """Test the clean architecture components."""

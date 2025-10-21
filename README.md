@@ -316,7 +316,30 @@ dotnet run
 
 ```
 trading-mvp/
-├── 📁 trading-intelligence/            # Clean Architecture Python Backend
+├── 📁 docs/                            # 📚 Project Documentation
+│   ├── SETUP_GUIDE.md                    # Step-by-step setup guide
+│   ├── REFACTORING_LOG.md                # Refactoring history
+│   └── REQUIREMENTS.md                   # Requirements documentation
+├── 📁 scripts/                         # 🔧 Build & Setup Scripts
+│   ├── setup.py                          # Cross-platform setup
+│   ├── setup.sh                          # Linux/macOS setup
+│   ├── setup.bat                         # Windows setup
+│   ├── run_server.py                     # Start API server
+│   ├── run_realtime.py                   # Start real-time service
+│   ├── start_api.py                      # Legacy API starter
+│   └── start_clean_api.py                # Clean API starter
+├── 📁 tests/                           # 🧪 Test Suite
+│   ├── test_clean_architecture.py        # Clean Architecture tests
+│   ├── test_complete_system.py           # End-to-end tests
+│   └── test_results_summary.py           # Test results summary
+├── 📁 tools/                           # 🛠️ Development Tools
+│   ├── code_analysis.py                  # Code quality analyzer
+│   ├── quality_report.py                 # Quality report generator
+│   ├── final_structure.py               # Structure documentation
+│   └── verify_structure.py               # Structure verification
+├── 📁 config/                          # ⚙️ Configuration Files
+│   └── config.yaml                       # Main configuration
+├── 📁 trading-intelligence/            # 🧠 Clean Architecture Python Backend
 │   ├── 📁 app/
 │   │   ├── 📁 domain/                  # 📦 DOMAIN LAYER
 │   │   │   ├── 📁 entities/

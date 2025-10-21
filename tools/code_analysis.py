@@ -9,7 +9,7 @@ import subprocess
 
 class CodeAnalyzer:
     def __init__(self):
-        self.base_dir = Path(__file__).parent
+        self.base_dir = Path(__file__).parent.parent
         self.issues = []
         self.improvements = []
         self.excellent_practices = []
@@ -66,28 +66,28 @@ class CodeAnalyzer:
         """Check import issues."""
         print("\n📥 IMPORT ANALYSIS:")
         
-        # Check files that may have outdated imports
+        # Check files that may have outdated imports in different locations
         files_to_check = [
-            "test_clean_architecture.py",
-            "start_clean_api.py", 
-            "run_realtime.py"
+            ("tests/test_clean_architecture.py", "tests/"),
+            ("scripts/start_clean_api.py", "scripts/"), 
+            ("scripts/run_realtime.py", "scripts/")
         ]
         
-        for file_name in files_to_check:
-            file_path = self.base_dir / file_name
-            if file_path.exists():
-                content = file_path.read_text(encoding='utf-8')
+        for file_path, location in files_to_check:
+            full_path = self.base_dir / file_path
+            if full_path.exists():
+                content = full_path.read_text(encoding='utf-8')
                 
                 # Check old imports
                 if "python.app" in content:
-                    print(f"   ⚠️ {file_name}: outdated imports found")
-                    self.issues.append(f"{file_name}: contains obsolete 'python.app' imports")
+                    print(f"   ⚠️ {location}{full_path.name}: outdated imports found")
+                    self.issues.append(f"{location}{full_path.name}: contains obsolete 'python.app' imports")
                 else:
-                    print(f"   ✅ {file_name}: imports updated")
+                    print(f"   ✅ {location}{full_path.name}: imports updated")
                     
                 if "dotnet/TradingExecutor" in content:
-                    print(f"   ⚠️ {file_name}: old dotnet references")
-                    self.issues.append(f"{file_name}: contains obsolete 'dotnet/TradingExecutor' references")
+                    print(f"   ⚠️ {location}{full_path.name}: old dotnet references")
+                    self.issues.append(f"{location}{full_path.name}: contains obsolete 'dotnet/TradingExecutor' references")
     
     def check_naming(self):
         """Check naming conventions."""
@@ -111,19 +111,31 @@ class CodeAnalyzer:
         """Check documentation quality."""
         print("\n📚 DOCUMENTATION ANALYSIS:")
         
-        docs = ["README.md", "SETUP_GUIDE.md", "REFACTORING_LOG.md"]
+        # Check main README in root
+        readme = self.base_dir / "README.md"
+        if readme.exists():
+            size = readme.stat().st_size
+            print(f"   ✅ README.md: comprehensive documentation ({size:,} bytes)")
+            self.excellent_practices.append("Complete documentation: README.md")
+        else:
+            self.issues.append("Documentation missing: README.md")
         
-        for doc in docs:
-            if (self.base_dir / doc).exists():
-                size = (self.base_dir / doc).stat().st_size
-                if size > 1000:  # More than 1KB indicates substantial documentation
-                    print(f"   ✅ {doc}: comprehensive documentation ({size:,} bytes)")
-                    self.excellent_practices.append(f"Complete documentation: {doc}")
-                else:
-                    print(f"   ⚠️ {doc}: documentation too short")
-                    self.improvements.append(f"Expand documentation in {doc}")
-            else:
-                self.issues.append(f"Documentation missing: {doc}")
+        # Check documentation in docs/ folder
+        docs_folder = self.base_dir / "docs"
+        if docs_folder.exists():
+            doc_files = ["SETUP_GUIDE.md", "REFACTORING_LOG.md", "REQUIREMENTS.md", "PROJECT_STRUCTURE.md"]
+            for doc in doc_files:
+                doc_path = docs_folder / doc
+                if doc_path.exists():
+                    size = doc_path.stat().st_size
+                    if size > 1000:  # More than 1KB indicates substantial documentation
+                        print(f"   ✅ docs/{doc}: comprehensive documentation ({size:,} bytes)")
+                        self.excellent_practices.append(f"Complete documentation: docs/{doc}")
+                    else:
+                        print(f"   ⚠️ docs/{doc}: documentation too short")
+                        self.improvements.append(f"Expand documentation in docs/{doc}")
+        else:
+            self.issues.append("Documentation folder missing: docs/")
     
     def check_security(self):
         """Check security aspects."""
@@ -176,15 +188,27 @@ class CodeAnalyzer:
         """Check test coverage."""
         print("\n🧪 TESTING ANALYSIS:")
         
-        test_files = list(self.base_dir.glob("test_*.py"))
-        
-        if test_files:
-            print(f"   ✅ {len(test_files)} test files found")
-            for test_file in test_files:
-                print(f"      - {test_file.name}")
-                self.excellent_practices.append(f"Test implemented: {test_file.name}")
+        # Check for test files in tests/ folder
+        tests_folder = self.base_dir / "tests"
+        if tests_folder.exists():
+            test_files = list(tests_folder.glob("test_*.py"))
+            if test_files:
+                print(f"   ✅ {len(test_files)} test files found in tests/")
+                for test_file in test_files:
+                    print(f"      - {test_file.name}")
+                    self.excellent_practices.append(f"Test implemented: tests/{test_file.name}")
+            else:
+                self.issues.append("No test files found in tests/ folder")
         else:
-            self.issues.append("No test files found")
+            # Fallback: check for test files in root (legacy)
+            test_files = list(self.base_dir.glob("test_*.py"))
+            if test_files:
+                print(f"   ✅ {len(test_files)} test files found in root")
+                for test_file in test_files:
+                    print(f"      - {test_file.name}")
+                    self.excellent_practices.append(f"Test implemented: {test_file.name}")
+            else:
+                self.issues.append("No test files found")
             
         # Check if tests are updated
         for test_file in test_files:
