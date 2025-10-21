@@ -1,29 +1,29 @@
-# Guia Completo de Execução - Trading MVP
+# Complete Execution Guide - Trading MVP
 
-## 🔧 Pré-requisitos
+## 🔧 Prerequisites
 
 ### Python
-- **Versão recomendada**: Python 3.11
-- **Versão mínima**: Python 3.10
-- **Evitar**: Python 3.12 (instabilidades conhecidas)
+- **Recommended version**: Python 3.11
+- **Minimum version**: Python 3.10
+- **Avoid**: Python 3.12 (known instabilities)
 
 ### .NET
-- **.NET 8 SDK** ou superior
+- **.NET 8 SDK** or higher
 
-### Verificação de Versões
+### Version Verification
 ```bash
-python --version  # Deve ser 3.10+
-dotnet --version  # Deve ser 8.0+
+python --version  # Should be 3.10+
+dotnet --version  # Should be 8.0+
 ```
 
-## 📦 1. Configuração do Ambiente Python
+## 📦 1. Python Environment Configuration
 
-### Passo 1: Navegar para o diretório Python
+### Step 1: Navigate to Python directory
 ```bash
 cd trading-intelligence
 ```
 
-### Passo 2: Criar ambiente virtual
+### Step 2: Create virtual environment
 ```bash
 # Linux/Mac
 python -m venv .venv && source .venv/bin/activate
@@ -32,119 +32,119 @@ python -m venv .venv && source .venv/bin/activate
 python -m venv .venv && .venv\Scripts\activate
 ```
 
-### Passo 3: Instalar dependências
+### Step 3: Install dependencies
 ```bash
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### Passo 4: Treinar o modelo (⏱️ ~10-15 minutos)
+### Step 4: Train the model (⏱️ ~10-15 minutes)
 ```bash
 python app/model_train.py --symbol BTC/USDT --timeframe 1h --years 2
 ```
 
-**Saída esperada:**
-- Arquivo `artifacts/model.pkl`
-- Arquivo `artifacts/feature_config.json`
-- Accuracy do modelo reportada
+**Expected output:**
+- File `artifacts/model.pkl`
+- File `artifacts/feature_config.json`
+- Model accuracy reported
 
-### Passo 5: Iniciar o serviço FastAPI
+### Step 5: Start FastAPI service
 ```bash
 uvicorn app.service:app --host 0.0.0.0 --port 8000
 ```
 
-**Verificação:**
-- Acesse: http://localhost:8000/health
-- Deve retornar: `{"status":"ok", "model_loaded": true, ...}`
+**Verification:**
+- Access: http://localhost:8000/health
+- Should return: `{"status":"ok", "model_loaded": true, ...}`
 
-## 🎯 2. Executar o Robô (.NET)
+## 🎯 2. Execute the Robot (.NET)
 
-### Em um novo terminal:
+### In a new terminal:
 
 ```bash
 cd trading-executor
 dotnet build
 ```
 
-**Verificar se não há erros de compilação**
+**Check for no compilation errors**
 
 ```bash
 dotnet run
 ```
 
-**Saída esperada:**
+**Expected output:**
 ```
 TradingExecutor started. Press Ctrl+C to stop.
 2025-10-20T... | BTC/USDT 1h | BUY | pBuy=0.612 pSell=0.388 | price=67234.50 | pos=2.5%
 [MOCK BUY] BTC/USDT qty=0.000371
 ```
 
-## 🔍 3. Testes e Verificação
+## 🔍 3. Tests and Verification
 
-### Testar API manualmente:
+### Test API manually:
 ```bash
 curl "http://localhost:8000/predict?symbol=BTC/USDT&timeframe=1h"
 ```
 
-### Verificar logs do executor:
-- Decisões sendo tomadas a cada minuto
-- Ordens mock sendo executadas
-- Preços e probabilidades sendo reportados
+### Check executor logs:
+- Decisions being made every minute
+- Mock orders being executed
+- Prices and probabilities being reported
 
 ## ⚠️ 4. Troubleshooting
 
-### Erro: "ModuleNotFoundError"
+### Error: "ModuleNotFoundError"
 ```bash
-# Verificar se ambiente virtual está ativo
-which python  # Deve apontar para .venv
+# Check if virtual environment is active
+which python  # Should point to .venv
 
-# Reinstalar dependências
+# Reinstall dependencies
 pip install -r requirements.txt --force-reinstall
 ```
 
-### Erro: "Connection refused" no .NET
+### Error: "Connection refused" in .NET
 ```bash
-# Verificar se FastAPI está rodando
+# Check if FastAPI is running
 curl http://localhost:8000/health
 
-# Verificar porta em uso
+# Check port in use
 netstat -an | grep 8000
 ```
 
-### Erro: "Model not found"
+### Error: "Model not found"
 ```bash
-# Verificar se treinamento foi concluído
+# Check if training was completed
 ls -la artifacts/
-# Deve ter: model.pkl e feature_config.json
+# Should have: model.pkl and feature_config.json
 ```
 
-## 🚀 5. Próximos Passos
+## 🚀 5. Next Steps
 
-### Para Paper Trading prolongado:
-1. Execute por 2-4 semanas
-2. Monitore performance via logs
-3. Analise métricas de P&L simulado
+### For extended Paper Trading:
+1. Run for 2-4 weeks
+2. Monitor performance via logs
+3. Analyze simulated P&L metrics
 
-### Para Produção (quando ready):
-1. Implemente `BinanceSpotOrderExecutor`
-2. Configure API keys da Binance
-3. Inicie com capital pequeno (< $100)
-4. Monitore 24/7 nos primeiros dias
+### For Production (when ready):
+1. Implement `BinanceSpotOrderExecutor`
+2. Configure Binance API keys
+3. Start with small capital (< $100)
+4. Monitor 24/7 for the first few days
 
-## 📊 6. Monitoramento
+## 📊 6. Monitoring
 
-### Métricas importantes:
-- **Accuracy direcional**: >55% considerado bom
-- **Win rate**: ratio de trades profitable
-- **Max drawdown**: perda máxima consecutiva
-- **Sharpe ratio**: retorno ajustado ao risco
+### Important metrics:
+- **Directional accuracy**: >55% considered good
+- **Win rate**: ratio of profitable trades
+- **Max drawdown**: maximum consecutive loss
+- **Sharpe ratio**: risk-adjusted return
 
-### Logs a observar:
-- Frequência de trades
-- Distribuição BUY/SELL/FLAT
-- Valores de probabilidade
-- Tamanhos de posição
+### Logs to observe:
+- Trade frequency
+- BUY/SELL/FLAT distribution
+- Probability values
+- Position sizes
 
 ---
 
-**⚠️ IMPORTANTE**: Este MVP está em modo PAPER TRADING. Nenhuma ordem real será executada até que você implemente e ative o `BinanceSpotOrderExecutor`.
+**⚠️ IMPORTANT**: This MVP is in PAPER TRADING mode. No real orders will be executed until you implement and activate the `BinanceSpotOrderExecutor`.

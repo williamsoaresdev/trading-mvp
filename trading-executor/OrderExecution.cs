@@ -24,8 +24,8 @@ public sealed class LegacyMockOrderExecutor : ILegacyOrderExecutor
     }
 }
 
-// EXEMPLO para implementação real (Binance):
-// - Usar Binance.Net ou sua própria chamada REST assinada (HMAC SHA256) com API key/secret.
-// - Implementar PlaceBuyAsync/PlaceSellAsync criando ordens LIMIT/MARKET conforme sua preferência.
-// - Respeitar limites de lote/tickSize da exchange.
+// EXAMPLE for real implementation (Binance):
+// - Use Binance.Net or your own signed REST call (HMAC SHA256) with API key/secret.
+// - Implement PlaceBuyAsync/PlaceSellAsync creating LIMIT/MARKET orders as per your preference.
+// - Respect exchange lot/tickSize limits.
 // public sealed class BinanceSpotOrderExecutor : IOrderExecutor { ... }

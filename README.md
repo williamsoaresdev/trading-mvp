@@ -9,68 +9,68 @@
 
 A complete **real-time algorithmic trading system** featuring **Clean Architecture**, **SOLID principles**, **machine learning predictions**, **WebSocket streaming**, **automated trading execution**, and **live monitoring dashboard**.
 
-Este MVP implementa um sistema completo de trading automatizado seguindo os padrões de **Clean Architecture** e **Clean Code**, com **machine learning**, **execução automática em tempo real**, **WebSocket para streaming de dados**, e **dashboard de monitoramento ao vivo**.
+This MVP implements a complete automated trading system following **Clean Architecture** and **Clean Code** patterns, with **machine learning**, **real-time automated execution**, **WebSocket for data streaming**, and **live monitoring dashboard**.
 
 ## 🏛️ Clean Architecture Implementation
 
-O sistema foi completamente refatorado seguindo os princípios da **Clean Architecture** e **SOLID**, garantindo alta qualidade, testabilidade e manutenibilidade do código.
+The system has been completely refactored following **Clean Architecture** and **SOLID** principles, ensuring high quality, testability, and code maintainability.
 
-### ✅ **Princípios SOLID Implementados:**
-- **🔹 Single Responsibility**: Cada classe tem uma única responsabilidade bem definida
-- **🔹 Open/Closed**: Aberto para extensão, fechado para modificação
-- **🔹 Liskov Substitution**: Interfaces implementadas corretamente
-- **🔹 Interface Segregation**: Interfaces pequenas e focadas
-- **🔹 Dependency Inversion**: Dependências abstraídas por interfaces
+### ✅ **SOLID Principles Implemented:**
+- **🔹 Single Responsibility**: Each class has a single, well-defined responsibility
+- **🔹 Open/Closed**: Open for extension, closed for modification
+- **🔹 Liskov Substitution**: Interfaces implemented correctly
+- **🔹 Interface Segregation**: Small and focused interfaces
+- **🔹 Dependency Inversion**: Dependencies abstracted by interfaces
 
-### 🏗️ **Estrutura em Camadas:**
+### 🏗️ **Layered Structure:**
 
-#### **📦 Domain Layer** (Núcleo do Negócio)
+#### **📦 Domain Layer** (Business Core)
 - **Entities**: `TradingDecision`, `TradingSession`
 - **Value Objects**: `TradingSymbol`, `Money`, `Percentage`, `TradingAction`
-- **Repository Interfaces**: Abstrações para persistência
-- **Zero dependências externas**
+- **Repository Interfaces**: Abstractions for persistence
+- **Zero external dependencies**
 
-#### **⚙️ Application Layer** (Casos de Uso)
+#### **⚙️ Application Layer** (Use Cases)
 - **Use Cases**: `GenerateTradingDecisionUseCase`, `StartTradingSessionUseCase`
-- **Application Services**: Orquestração da lógica de negócio
-- **Dependency Injection**: Inversão de controle
-- **Depende apenas do Domain Layer**
+- **Application Services**: Business logic orchestration
+- **Dependency Injection**: Control inversion
+- **Depends only on Domain Layer**
 
-#### **🏗️ Infrastructure Layer** (Implementações Técnicas)
+#### **🏗️ Infrastructure Layer** (Technical Implementations)
 - **Repositories**: `InMemoryTradingDecisionRepository`
 - **External Services**: `CCXTMarketDataRepository`, `MLPredictionService`
-- **Data Persistence**: Implementações concretas
-- **APIs Externas**: Binance, WebSocket, HTTP clients
+- **Data Persistence**: Concrete implementations
+- **External APIs**: Binance, WebSocket, HTTP clients
 
 #### **🖥️ Presentation Layer** (Interface/API)
-- **FastAPI**: Endpoints RESTful limpos
-- **WebSocket**: Comunicação em tempo real
-- **Controllers**: Thin controllers delegando para use cases
-- **DTOs**: Objetos de transferência de dados
+- **FastAPI**: Clean RESTful endpoints
+- **WebSocket**: Real-time communication
+- **Controllers**: Thin controllers delegating to use cases
+- **DTOs**: Data transfer objects
 
-### 🎯 **Benefícios Alcançados:**
+### 🎯 **Benefits Achieved:**
 
-**✅ Testabilidade:**
-- Dependencies podem ser facilmente mockadas
-- Testes unitários isolados por camada
-- Cobertura de testes abrangente
+**✅ Testability:**
+- Dependencies can be easily mocked
+- Isolated unit tests per layer
+- Comprehensive test coverage
 
-**✅ Manutenibilidade:**
-- Separação clara de responsabilidades
-- Mudanças isoladas em camadas específicas
-- Código autodocumentado
+**✅ Maintainability:**
+- Clear separation of concerns
+- Changes isolated to specific layers
+- Self-documenting code
 
-**✅ Flexibilidade:**
-- Fácil troca de implementações (banco de dados, APIs)
-- Adição de novas features sem quebrar código existente
-- Suporte a múltiplas estratégias de trading
+**✅ Flexibility:**
+- Easy switching of implementations (database, APIs)
+- Adding new features without breaking existing code
+- Support for multiple trading strategies
 
-**✅ Escalabilidade:**
-- Estrutura preparada para microserviços
-- Padrões que suportam crescimento
-- Baixo acoplamento entre componentes
+**✅ Scalability:**
+- Structure ready for microservices
+- Patterns that support growth
+- Low coupling between components
 
-## 🏗️ Arquitetura - Clean Architecture
+## 🏗️ Architecture - Clean Architecture
 
 ### **Python** (Clean Architecture Implementation)
 
@@ -78,59 +78,59 @@ O sistema foi completamente refatorado seguindo os princípios da **Clean Archit
 ```
 domain/
 ├── entities/
-│   ├── trading_decision.py    # Entidade principal de decisão
-│   └── trading_session.py     # Sessão de trading
+│   ├── trading_decision.py    # Main decision entity
+│   └── trading_session.py     # Trading session
 ├── value_objects/
-│   ├── symbol.py              # Símbolo de trading (BTC/USDT)
-│   ├── money.py               # Valor monetário com validação
-│   ├── percentage.py          # Porcentagem com regras de negócio
-│   └── trading_action.py      # Ação de trading (BUY/SELL/FLAT)
+│   ├── symbol.py              # Trading symbol (BTC/USDT)
+│   ├── money.py               # Monetary value with validation
+│   ├── percentage.py          # Percentage with business rules
+│   └── trading_action.py      # Trading action (BUY/SELL/FLAT)
 └── repositories/
-    ├── trading_decision_repository.py    # Interface de repositório
-    └── market_data_repository.py         # Interface de dados de mercado
+    ├── trading_decision_repository.py    # Repository interface
+    └── market_data_repository.py         # Market data interface
 ```
 
 #### **⚙️ Application Layer** (`trading-intelligence/app/application/`)
 ```
 application/
 ├── use_cases/
-│   ├── generate_trading_decision.py    # UC: Gerar decisão de trading
-│   ├── start_trading_session.py       # UC: Iniciar sessão
-│   └── stop_trading_session.py        # UC: Parar sessão
+│   ├── generate_trading_decision.py    # UC: Generate trading decision
+│   ├── start_trading_session.py       # UC: Start session
+│   └── stop_trading_session.py        # UC: Stop session
 └── services/
-    └── clean_trading_service.py        # Serviço de aplicação principal
+    └── clean_trading_service.py        # Main application service
 ```
 
 #### **🏗️ Infrastructure Layer** (`trading-intelligence/app/infrastructure/`)
 ```
 infrastructure/
 ├── repositories/
-│   └── in_memory_decision_repository.py    # Implementação em memória
+│   └── in_memory_decision_repository.py    # In-memory implementation
 ├── external/
-│   └── ccxt_market_data.py                 # Dados via CCXT/Binance
+│   └── ccxt_market_data.py                 # Data via CCXT/Binance
 ├── ml/
-│   └── ml_prediction_service.py            # Serviço de ML
+│   └── ml_prediction_service.py            # ML service
 └── persistence/
-    └── file_system.py                      # Persistência em arquivo
+    └── file_system.py                      # File persistence
 ```
 
 #### **🖥️ Presentation Layer** (`trading-intelligence/app/presentation/`)
 ```
 presentation/
 ├── api/
-│   ├── trading_controller.py              # Controller REST
-│   └── websocket_handler.py               # Handler WebSocket
+│   ├── trading_controller.py              # REST controller
+│   └── websocket_handler.py               # WebSocket handler
 ├── dto/
-│   ├── trading_request.py                 # DTOs de request
-│   └── trading_response.py                # DTOs de response
-└── main.py                                # FastAPI app principal
+│   ├── trading_request.py                 # Request DTOs
+│   └── trading_response.py                # Response DTOs
+└── main.py                                # Main FastAPI app
 ```
 
 ### **.NET** (Clean Architecture Implementation)
 
 #### **📦 Domain Layer** (`trading-executor/Domain/`)
 ```csharp
-// Domain Models (Records imutáveis)
+// Domain Models (Immutable records)
 public record TradingDecision(Symbol Symbol, TradingAction Action, decimal Confidence);
 public record OrderResult(bool Success, string Message, decimal ExecutedPrice);
 
@@ -177,52 +177,52 @@ public class MockOrderExecutor : ITradingExecutor
 - **UI moderna**: gradientes, animações, códigos de cores, indicadores de status de conexão
 
 ### **Config**
-- `config/config.yaml`: parâmetros (símbolo, timeframe, limiares, sizing, stops).
+- `config/config.yaml`: parameters (symbol, timeframe, thresholds, sizing, stops).
 
-## 🚀 Pré-requisitos
+## 🚀 Prerequisites
 
-- **Python 3.10+** (testado com Python 3.13)
-- **.NET 8 SDK** ou superior (testado com .NET 9.0)  
-- **Node.js 18+** e npm para o dashboard Angular
-- Conta/exchange para dados *live* (Binance — endpoints públicos bastam para dados; para ordens reais, inserir keys)
+- **Python 3.10+** (tested with Python 3.13)
+- **.NET 8 SDK** or higher (tested with .NET 9.0)  
+- **Node.js 18+** and npm for Angular dashboard
+- Account/exchange for *live* data (Binance — public endpoints sufficient for data; for real orders, insert keys)
 
 ## ⚡ Quick Start - Real-Time System
 
-### **🔥 Modo Recomendado: Sistema Completo em Tempo Real**
+### **🔥 Recommended Mode: Complete Real-Time System**
 
-**1. Inicie a API Python (Terminal 1):**
+**1. Start Python API (Terminal 1):**
 ```bash
 cd trading-intelligence
 python app/simple_realtime.py
 ```
 
-**2. Inicie o Executor .NET (Terminal 2):**
+**2. Start .NET Executor (Terminal 2):**
 ```bash
 cd trading-executor
 dotnet run
 ```
 
-**3. Inicie o Dashboard Angular (Terminal 3):**
+**3. Start Angular Dashboard (Terminal 3):**
 ```bash
 cd trading-dashboard
 npm start
 ```
 
-### **🎯 O que acontece:**
-- ✅ **API Python**: Roda na porta 8000 com WebSocket
-- ✅ **Decisões automáticas**: A cada 30-60 segundos  
-- ✅ **Executor .NET**: Conecta via WebSocket e executa ordens
-- ✅ **Dashboard Angular**: Updates em tempo real na porta 4200
-- ✅ **WebSocket streaming**: Comunicação bidirecional entre serviços
-- ✅ **Logs detalhados**: Acompanhe cada decisão e execução
+### **🎯 What happens:**
+- ✅ **Python API**: Runs on port 8000 with WebSocket
+- ✅ **Automatic decisions**: Every 30-60 seconds  
+- ✅ **.NET Executor**: Connects via WebSocket and executes orders
+- ✅ **Angular Dashboard**: Real-time updates on port 4200
+- ✅ **WebSocket streaming**: Bidirectional communication between services
+- ✅ **Detailed logs**: Follow each decision and execution
 
-### **🌐 URLs de Acesso:**
-- **Dashboard**: http://localhost:4200 (updates ao vivo)
+### **🌐 Access URLs:**
+- **Dashboard**: http://localhost:4200 (live updates)
 - **API Health**: http://localhost:8000/health  
 - **Trading Status**: http://localhost:8000/trading/status
 - **WebSocket**: ws://localhost:8000/ws
 
-### **🛠️ Setup Alternativo (Primeira Vez)**
+### **🛠️ Alternative Setup (First Time)**
 
 **Windows:**
 ```cmd
@@ -242,18 +242,18 @@ python setup.py
 
 ### **📚 Setup Manual (Opcional)**
 
-**Preparar Ambiente** (primeira vez):
+**Prepare Environment** (first time):
 ```bash
 cd trading-intelligence
 
-2. **Treinar Modelo ML** (primeira vez):
+2. **Train ML Model** (first time):
 ```bash
 cd python
 source .venv/bin/activate  # Windows: .venv\Scripts\activate
 python app/model_train.py --symbol BTC/USDT --timeframe 1h --years 1
 ```
 
-3. **Modo Tradicional** (sem WebSocket):
+3. **Traditional Mode** (without WebSocket):
 
 Terminal 1 - FastAPI Server:
 ```bash
@@ -274,36 +274,36 @@ dotnet run
 
 ## 📊 **Dashboard Features - Real-Time**
 
-- **📈 Estatísticas Ao Vivo**
-  - Total de decisões (BUY/SELL/FLAT) em tempo real
-  - Percentuais de distribuição atualizados automaticamente
-  - Preço atual do BTC via WebSocket
-  - Nível de confiança médio das decisões
+- **📈 Live Statistics**
+  - Total decisions (BUY/SELL/FLAT) in real-time
+  - Distribution percentages automatically updated
+  - Current BTC price via WebSocket
+  - Average confidence level of decisions
 
-- **📋 Tabela de Decisões Streaming**
-  - Stream de decisões em tempo real via WebSocket
-  - Últimas 100 decisões com timestamps precisos
-  - Probabilidades de compra/venda instantâneas
-  - Barra de confiança visual dinâmica
-  - Status de execução das ordens
+- **📋 Streaming Decision Table**
+  - Real-time decision stream via WebSocket
+  - Last 100 decisions with precise timestamps
+  - Instant buy/sell probabilities
+  - Dynamic visual confidence bar
+  - Order execution status
 
-- **🔄 Conectividade Tempo Real**
-  - **WebSocket connection** para updates instantâneos
-  - Indicador de status da conexão (Online/Offline)
-  - Fallback automático para polling HTTP
-  - Botão de reconexão manual
-  - Latência exibida em tempo real
+- **🔄 Real-Time Connectivity**
+  - **WebSocket connection** for instant updates
+  - Connection status indicator (Online/Offline)
+  - Automatic fallback to HTTP polling
+  - Manual reconnection button
+  - Real-time latency display
 
-- **⚡ Monitoramento de Sistema**
-  - Status dos serviços (API, Executor, Dashboard)
-  - Número de conexões WebSocket ativas
-  - Indicadores de saúde do sistema
-  - Logs de execução em tempo real
+- **⚡ System Monitoring**
+  - Service status (API, Executor, Dashboard)
+  - Number of active WebSocket connections
+  - System health indicators
+  - Real-time execution logs
 
-## 🌐 **URLs de Acesso - Sistema Completo**
+## 🌐 **Access URLs - Complete System**
 
-- **🖥️ Dashboard Angular**: http://localhost:4200 (live updates via WebSocket)
-- **🔗 API FastAPI**: http://localhost:8000  
+- **🖥️ Angular Dashboard**: http://localhost:4200 (live updates via WebSocket)
+- **🔗 FastAPI API**: http://localhost:8000  
 - **📊 API Health**: http://localhost:8000/health
 - **📈 Trading Status**: http://localhost:8000/trading/status
 - **📋 Trading History**: http://localhost:8000/trading/history
@@ -312,7 +312,7 @@ dotnet run
 - **▶️ Start Trading**: POST http://localhost:8000/trading/start
 - **⏹️ Stop Trading**: POST http://localhost:8000/trading/stop
 
-## 📁 **Estrutura do Projeto - Clean Architecture**
+## 📁 **Project Structure - Clean Architecture**
 
 ```
 trading-mvp/
@@ -320,13 +320,13 @@ trading-mvp/
 │   ├── 📁 app/
 │   │   ├── 📁 domain/                  # 📦 DOMAIN LAYER
 │   │   │   ├── 📁 entities/
-│   │   │   │   ├── trading_decision.py    # Entidade principal
-│   │   │   │   └── trading_session.py     # Sessão de trading
+│   │   │   │   ├── trading_decision.py    # Main entity
+│   │   │   │   └── trading_session.py     # Trading session
 │   │   │   ├── 📁 value_objects/
-│   │   │   │   ├── symbol.py              # Símbolo (BTC/USDT)
-│   │   │   │   ├── money.py               # Valor monetário
-│   │   │   │   ├── percentage.py          # Porcentagem
-│   │   │   │   └── trading_action.py      # Ação (BUY/SELL/FLAT)
+│   │   │   │   ├── symbol.py              # Symbol (BTC/USDT)
+│   │   │   │   ├── money.py               # Monetary value
+│   │   │   │   ├── percentage.py          # Percentage
+│   │   │   │   └── trading_action.py      # Action (BUY/SELL/FLAT)
 │   │   │   └── 📁 repositories/
 │   │   │       ├── trading_decision_repository.py
 │   │   │       └── market_data_repository.py
@@ -417,7 +417,7 @@ trading-mvp/
 - ✅ **Presentation Layer**: Coordena Application e Infrastructure
 - ✅ **Dependency Injection**: Injeta Infrastructure no Application
 
-## ⚙️ **Configuração (config.yaml)**
+## ⚙️ **Configuration (config.yaml)**
 
 ```yaml
 symbol: "BTC/USDT"
@@ -471,7 +471,7 @@ python test_results_summary.py
 ```csharp
 // 1. Implementar BinanceSpotOrderExecutor em OrderExecution.cs
 // 2. Adicionar suas credenciais da Binance
-// 3. Descomentar linhas de execução real
+// 3. Uncomment real execution lines
 // 4. Iniciar com capital pequeno (< $100)
 // 5. Monitorar 24/7 nos primeiros dias
 ```
@@ -551,7 +551,7 @@ curl http://localhost:4200
 - [x] **Dashboard responsivo** com updates instantâneos
 - [x] **Executor .NET** com cliente WebSocket robusto
 - [x] **Risk management** integrado com circuit breakers
-- [x] **Logs detalhados** para monitoramento completo
+- [x] **Detailed logs** for complete monitoring
 - [x] **Fallback automático** HTTP quando WebSocket falha
 - [x] **Mock orders** para testing seguro
 - [x] **Status monitoring** em tempo real
@@ -569,7 +569,7 @@ curl http://localhost:4200
 - [x] **Open/Closed Principle** para extensibilidade
 - [x] **Clean Code Standards** aplicados
 - [x] **Test Suite abrangente** validando todas as camadas
-- [x] **Error Handling centralizado** e logging estruturado
+- [x] **Centralized Error Handling** and structured logging
 - [x] **Configuration Management** desacoplado
 - [x] **Async/Await patterns** implementados corretamente
 
@@ -615,8 +615,8 @@ Este projeto está sob licença MIT. Veja o arquivo `LICENSE` para mais detalhes
 
 ---
 
-**⚠️ DISCLAIMER**: Este é um projeto educacional com foco em **Clean Architecture**, **SOLID principles**, **real-time systems** e **WebSocket streaming**. O sistema demonstra como implementar arquitetura limpa em um contexto de trading automatizado. Trading automatizado envolve riscos financeiros significativos. Use apenas capital que você pode perder. O sistema atual utiliza **mock orders** para segurança. Não somos responsáveis por perdas financeiras.
+**⚠️ DISCLAIMER**: This is an educational project focused on **Clean Architecture**, **SOLID principles**, **real-time systems** and **WebSocket streaming**. The system demonstrates how to implement clean architecture in an automated trading context. Automated trading involves significant financial risks. Use only capital you can afford to lose. The current system uses **mock orders** for safety. We are not responsible for financial losses.
 
-**🏛️ DESTAQUE ARQUITETURAL**: Sistema completo implementando **Clean Architecture** com **Domain-Driven Design**, **SOLID principles**, **Dependency Injection**, **Use Cases pattern**, **Repository pattern**, **Value Objects**, e **Entity pattern** - **100% testado e funcionando!**
+**🏛️ ARCHITECTURAL HIGHLIGHT**: Complete system implementing **Clean Architecture** with **Domain-Driven Design**, **SOLID principles**, **Dependency Injection**, **Use Cases pattern**, **Repository pattern**, **Value Objects**, and **Entity pattern** - **100% tested and working!**
 
-**🔥 DESTAQUE TÉCNICO**: Sistema completo de **trading em tempo real** com **comunicação WebSocket** entre Python, .NET e Angular seguindo **Clean Architecture** - **arquitetura de produção!**
+**🔥 TECHNICAL HIGHLIGHT**: Complete **real-time trading system** with **WebSocket communication** between Python, .NET and Angular following **Clean Architecture** - **production architecture!**

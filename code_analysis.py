@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Análise Completa do Código - Trading MVP
+Complete Code Analysis - Trading MVP
 """
 import os
 import sys
@@ -15,9 +15,9 @@ class CodeAnalyzer:
         self.excellent_practices = []
     
     def analyze_all(self):
-        """Realizar análise completa do código."""
+        """Perform complete code analysis."""
         print("=" * 80)
-        print("🔍 ANÁLISE COMPLETA DO CÓDIGO - TRADING MVP")
+        print("🔍 COMPLETE CODE ANALYSIS - TRADING MVP")
         print("=" * 80)
         
         self.check_structure()
@@ -32,8 +32,8 @@ class CodeAnalyzer:
         self.generate_report()
     
     def check_structure(self):
-        """Verificar estrutura de pastas."""
-        print("\n📁 ANÁLISE DE ESTRUTURA:")
+        """Check folder structure."""
+        print("\n📁 STRUCTURE ANALYSIS:")
         
         required_dirs = [
             "trading-intelligence",
@@ -44,13 +44,13 @@ class CodeAnalyzer:
         
         for dir_name in required_dirs:
             if (self.base_dir / dir_name).exists():
-                print(f"   ✅ {dir_name}/ presente")
-                self.excellent_practices.append(f"Estrutura bem organizada: {dir_name}/")
+                print(f"   ✅ {dir_name}/ present")
+                self.excellent_practices.append(f"Well-organized structure: {dir_name}/")
             else:
-                print(f"   ❌ {dir_name}/ ausente")
-                self.issues.append(f"Pasta obrigatória ausente: {dir_name}/")
+                print(f"   ❌ {dir_name}/ missing")
+                self.issues.append(f"Required folder missing: {dir_name}/")
         
-        # Verificar Clean Architecture no trading-intelligence
+        # Check Clean Architecture in trading-intelligence
         clean_arch_dirs = ["domain", "application", "infrastructure", "presentation"]
         ti_app = self.base_dir / "trading-intelligence" / "app"
         
@@ -58,15 +58,15 @@ class CodeAnalyzer:
             for arch_dir in clean_arch_dirs:
                 if (ti_app / arch_dir).exists():
                     print(f"   ✅ Clean Architecture: app/{arch_dir}/")
-                    self.excellent_practices.append(f"Clean Architecture implementada: {arch_dir}")
+                    self.excellent_practices.append(f"Clean Architecture implemented: {arch_dir}")
                 else:
-                    self.issues.append(f"Camada Clean Architecture ausente: {arch_dir}")
+                    self.issues.append(f"Clean Architecture layer missing: {arch_dir}")
     
     def check_imports(self):
-        """Verificar problemas de imports."""
-        print("\n📥 ANÁLISE DE IMPORTS:")
+        """Check import issues."""
+        print("\n📥 IMPORT ANALYSIS:")
         
-        # Verificar arquivos que podem ter imports desatualizados
+        # Check files that may have outdated imports
         files_to_check = [
             "test_clean_architecture.py",
             "start_clean_api.py", 
@@ -78,83 +78,83 @@ class CodeAnalyzer:
             if file_path.exists():
                 content = file_path.read_text(encoding='utf-8')
                 
-                # Verificar imports antigos
+                # Check old imports
                 if "python.app" in content:
-                    print(f"   ⚠️ {file_name}: imports desatualizados encontrados")
-                    self.issues.append(f"{file_name}: contém imports 'python.app' obsoletos")
+                    print(f"   ⚠️ {file_name}: outdated imports found")
+                    self.issues.append(f"{file_name}: contains obsolete 'python.app' imports")
                 else:
-                    print(f"   ✅ {file_name}: imports atualizados")
+                    print(f"   ✅ {file_name}: imports updated")
                     
                 if "dotnet/TradingExecutor" in content:
-                    print(f"   ⚠️ {file_name}: referências antigas ao dotnet")
-                    self.issues.append(f"{file_name}: contém referências 'dotnet/TradingExecutor' obsoletas")
+                    print(f"   ⚠️ {file_name}: old dotnet references")
+                    self.issues.append(f"{file_name}: contains obsolete 'dotnet/TradingExecutor' references")
     
     def check_naming(self):
-        """Verificar convenções de nomenclatura."""
-        print("\n🏷️ ANÁLISE DE NOMENCLATURA:")
+        """Check naming conventions."""
+        print("\n🏷️ NAMING ANALYSIS:")
         
-        # Verificar se todos os nomes seguem Domain-Driven Design
+        # Check if all names follow Domain-Driven Design
         domain_names = [
-            ("trading-intelligence", "Inteligência de Trading (IA/ML)"),
-            ("trading-executor", "Executor de Ordens (.NET)"),
-            ("trading-dashboard", "Dashboard de Monitoramento")
+            ("trading-intelligence", "Trading Intelligence (AI/ML)"),
+            ("trading-executor", "Order Executor (.NET)"),
+            ("trading-dashboard", "Monitoring Dashboard")
         ]
         
         for folder, description in domain_names:
             if (self.base_dir / folder).exists():
                 print(f"   ✅ {folder}: {description}")
-                self.excellent_practices.append(f"Nomenclatura baseada em domínio: {folder}")
+                self.excellent_practices.append(f"Domain-based naming: {folder}")
             else:
-                self.issues.append(f"Pasta com nomenclatura de domínio ausente: {folder}")
+                self.issues.append(f"Domain-named folder missing: {folder}")
     
     def check_documentation(self):
-        """Verificar qualidade da documentação."""
-        print("\n📚 ANÁLISE DE DOCUMENTAÇÃO:")
+        """Check documentation quality."""
+        print("\n📚 DOCUMENTATION ANALYSIS:")
         
         docs = ["README.md", "SETUP_GUIDE.md", "REFACTORING_LOG.md"]
         
         for doc in docs:
             if (self.base_dir / doc).exists():
                 size = (self.base_dir / doc).stat().st_size
-                if size > 1000:  # Mais de 1KB indica documentação substancial
-                    print(f"   ✅ {doc}: documentação abrangente ({size:,} bytes)")
-                    self.excellent_practices.append(f"Documentação completa: {doc}")
+                if size > 1000:  # More than 1KB indicates substantial documentation
+                    print(f"   ✅ {doc}: comprehensive documentation ({size:,} bytes)")
+                    self.excellent_practices.append(f"Complete documentation: {doc}")
                 else:
-                    print(f"   ⚠️ {doc}: documentação muito curta")
-                    self.improvements.append(f"Expandir documentação em {doc}")
+                    print(f"   ⚠️ {doc}: documentation too short")
+                    self.improvements.append(f"Expand documentation in {doc}")
             else:
-                self.issues.append(f"Documentação ausente: {doc}")
+                self.issues.append(f"Documentation missing: {doc}")
     
     def check_security(self):
-        """Verificar aspectos de segurança."""
-        print("\n🔒 ANÁLISE DE SEGURANÇA:")
+        """Check security aspects."""
+        print("\n🔒 SECURITY ANALYSIS:")
         
-        # Verificar se .gitignore está protegendo arquivos sensíveis
+        # Check if .gitignore is protecting sensitive files
         gitignore = self.base_dir / ".gitignore"
         if gitignore.exists():
             content = gitignore.read_text()
             
             security_items = [
-                (".env", "Variáveis de ambiente"),
-                ("*.key", "Arquivos de chave"),
-                ("*.pem", "Certificados"),
-                ("artifacts/", "Modelos ML"),
-                (".venv/", "Ambiente virtual")
+                (".env", "Environment variables"),
+                ("*.key", "Key files"),
+                ("*.pem", "Certificates"),
+                ("artifacts/", "ML models"),
+                (".venv/", "Virtual environment")
             ]
             
             for pattern, description in security_items:
                 if pattern in content:
-                    print(f"   ✅ Protegido: {description}")
-                    self.excellent_practices.append(f"Segurança: {description} protegido")
+                    print(f"   ✅ Protected: {description}")
+                    self.excellent_practices.append(f"Security: {description} protected")
                 else:
-                    print(f"   ⚠️ Não protegido: {description}")
-                    self.improvements.append(f"Adicionar {pattern} ao .gitignore")
+                    print(f"   ⚠️ Not protected: {description}")
+                    self.improvements.append(f"Add {pattern} to .gitignore")
     
     def check_performance(self):
-        """Verificar aspectos de performance."""
-        print("\n⚡ ANÁLISE DE PERFORMANCE:")
+        """Check performance aspects."""
+        print("\n⚡ PERFORMANCE ANALYSIS:")
         
-        # Verificar uso de async/await
+        # Check async/await usage
         async_files = []
         
         for py_file in self.base_dir.glob("**/*.py"):
@@ -167,109 +167,109 @@ class CodeAnalyzer:
                     pass
         
         if async_files:
-            print(f"   ✅ Programação assíncrona implementada em {len(async_files)} arquivos")
-            self.excellent_practices.append("Uso de async/await para performance")
+            print(f"   ✅ Asynchronous programming implemented in {len(async_files)} files")
+            self.excellent_practices.append("Use of async/await for performance")
         else:
-            self.improvements.append("Considerar implementar programação assíncrona")
+            self.improvements.append("Consider implementing asynchronous programming")
     
     def check_testing(self):
-        """Verificar cobertura de testes."""
-        print("\n🧪 ANÁLISE DE TESTES:")
+        """Check test coverage."""
+        print("\n🧪 TESTING ANALYSIS:")
         
         test_files = list(self.base_dir.glob("test_*.py"))
         
         if test_files:
-            print(f"   ✅ {len(test_files)} arquivos de teste encontrados")
+            print(f"   ✅ {len(test_files)} test files found")
             for test_file in test_files:
                 print(f"      - {test_file.name}")
-                self.excellent_practices.append(f"Teste implementado: {test_file.name}")
+                self.excellent_practices.append(f"Test implemented: {test_file.name}")
         else:
-            self.issues.append("Nenhum arquivo de teste encontrado")
+            self.issues.append("No test files found")
             
-        # Verificar se tests estão atualizados
+        # Check if tests are updated
         for test_file in test_files:
             content = test_file.read_text(encoding='utf-8')
             if "python.app" in content:
-                self.issues.append(f"{test_file.name}: imports de teste desatualizados")
+                self.issues.append(f"{test_file.name}: outdated test imports")
     
     def check_dependencies(self):
-        """Verificar gestão de dependências."""
-        print("\n📦 ANÁLISE DE DEPENDÊNCIAS:")
+        """Check dependency management."""
+        print("\n📦 DEPENDENCY ANALYSIS:")
         
         # Python dependencies
         req_file = self.base_dir / "trading-intelligence" / "requirements.txt"
         if req_file.exists():
-            print("   ✅ requirements.txt presente")
-            self.excellent_practices.append("Gestão de dependências Python")
+            print("   ✅ requirements.txt present")
+            self.excellent_practices.append("Python dependency management")
         else:
-            self.issues.append("requirements.txt ausente")
+            self.issues.append("requirements.txt missing")
             
         # .NET dependencies  
         csproj_files = list(self.base_dir.glob("**/*.csproj"))
         if csproj_files:
-            print(f"   ✅ {len(csproj_files)} projeto(s) .NET encontrados")
-            self.excellent_practices.append("Gestão de dependências .NET")
+            print(f"   ✅ {len(csproj_files)} .NET project(s) found")
+            self.excellent_practices.append(".NET dependency management")
         else:
-            self.issues.append("Nenhum projeto .NET encontrado")
+            self.issues.append("No .NET projects found")
             
         # Node.js dependencies
         package_json = self.base_dir / "trading-dashboard" / "package.json"
         if package_json.exists():
-            print("   ✅ package.json presente")
-            self.excellent_practices.append("Gestão de dependências Node.js")
+            print("   ✅ package.json present")
+            self.excellent_practices.append("Node.js dependency management")
         else:
-            self.improvements.append("Verificar package.json do dashboard")
+            self.improvements.append("Check dashboard package.json")
     
     def generate_report(self):
-        """Gerar relatório final."""
+        """Generate final report."""
         print("\n" + "=" * 80)
-        print("📊 RELATÓRIO FINAL DE ANÁLISE")
+        print("📊 FINAL ANALYSIS REPORT")
         print("=" * 80)
         
-        # Estatísticas
+        # Statistics
         total_issues = len(self.issues)
         total_improvements = len(self.improvements)
         total_excellent = len(self.excellent_practices)
         
-        print(f"\n📈 ESTATÍSTICAS:")
-        print(f"   🏆 Excelentes práticas: {total_excellent}")
-        print(f"   ⚠️ Problemas encontrados: {total_issues}")
-        print(f"   💡 Melhorias sugeridas: {total_improvements}")
+        print(f"\n📈 STATISTICS:")
+        print(f"   🏆 Excellent practices: {total_excellent}")
+        print(f"   ⚠️ Issues found: {total_issues}")
+        print(f"   💡 Suggested improvements: {total_improvements}")
         
-        # Score de qualidade
+        # Quality score
         total_items = total_issues + total_improvements + total_excellent
         if total_items > 0:
             quality_score = (total_excellent / total_items) * 100
-            print(f"   🎯 Score de Qualidade: {quality_score:.1f}%")
+            print(f"   🎯 Quality Score: {quality_score:.1f}%")
         
-        # Detalhes dos problemas
+        # Issue details
         if self.issues:
-            print(f"\n❌ PROBLEMAS CRÍTICOS ({len(self.issues)}):")
+            print(f"\n❌ CRITICAL ISSUES ({len(self.issues)}):")
             for i, issue in enumerate(self.issues, 1):
                 print(f"   {i}. {issue}")
         
-        # Detalhes das melhorias
+        # Improvement details
         if self.improvements:
-            print(f"\n💡 MELHORIAS SUGERIDAS ({len(self.improvements)}):")
+            print(f"\n💡 SUGGESTED IMPROVEMENTS ({len(self.improvements)}):")
             for i, improvement in enumerate(self.improvements, 1):
                 print(f"   {i}. {improvement}")
         
-        # Práticas excelentes
+        # Excellent practices
         if self.excellent_practices:
-            print(f"\n🏆 PRÁTICAS EXCELENTES ({len(self.excellent_practices)}):")
+            print(f"\n🏆 EXCELLENT PRACTICES ({len(self.excellent_practices)}):")
             for i, practice in enumerate(self.excellent_practices, 1):
                 print(f"   {i}. {practice}")
         
-        # Recomendações finais
-        print(f"\n🎯 RECOMENDAÇÕES FINAIS:")
+        # Final recommendations
+        print(f"\n🎯 FINAL RECOMMENDATIONS:")
         if total_issues == 0:
-            print("   ✅ Código em excelente estado! Parabéns!")
+            print("   ✅ Code is in excellent condition! Congratulations!")
         elif total_issues <= 3:
-            print("   👍 Código em bom estado, poucos ajustes necessários")
+            print("   👍 Code is in good condition, few adjustments needed")
         elif total_issues <= 7:
-            print("   ⚠️ Código precisa de alguns ajustes importantes")
+            print("   ⚠️ Code needs some important adjustments")
         else:
-            print("   🚨 Código precisa de revisão significativa")
+            print("   🚨 Code needs significant review")
             
         print("\n" + "=" * 80)
 

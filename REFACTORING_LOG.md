@@ -1,71 +1,71 @@
 # 📋 Refactoring Log - Trading MVP
 
-## 🏗️ **Estrutura Renomeada - v2.0**
+## 🏗️ **Structure Renamed - v2.0**
 
-### **📅 Data**: 21 de Outubro de 2025
+### **📅 Date**: October 21, 2025
 
-### **🎯 Objetivo:**
-Organizar a estrutura de pastas com nomes que fazem sentido para o domínio da aplicação, removendo referências técnicas genéricas.
+### **🎯 Objective:**
+Organize folder structure with names that make sense for the application domain, removing generic technical references.
 
-### **🔄 Mudanças Realizadas:**
+### **🔄 Changes Made:**
 
-#### **📁 Renomeação de Pastas:**
+#### **📁 Folder Renaming:**
 ```diff
-- dotnet/TradingExecutor/     # ❌ Nome técnico genérico
-+ trading-executor/           # ✅ Nome consistente com convenções
+- dotnet/TradingExecutor/     # ❌ Generic technical name
++ trading-executor/           # ✅ Name consistent with conventions
 ```
 
-#### **📝 Arquivos Atualizados:**
-- ✅ `README.md` - Todas as referências atualizadas
-- ✅ `setup.sh` - Scripts de build atualizados
-- ✅ `setup.py` - Comandos Python atualizados
-- ✅ `SETUP_GUIDE.md` - Guia de instalação
-- ✅ `test_complete_system.py` - Testes de integração
-- ✅ `.gitignore` - Regras de exclusão
-- ✅ `trading-mvp.sln` - Solution Visual Studio
+#### **📝 Updated Files:**
+- ✅ `README.md` - All references updated
+- ✅ `setup.sh` - Build scripts updated
+- ✅ `setup.py` - Python commands updated
+- ✅ `SETUP_GUIDE.md` - Installation guide
+- ✅ `test_complete_system.py` - Integration tests
+- ✅ `.gitignore` - Exclusion rules
+- ✅ `trading-mvp.sln` - Visual Studio Solution
 
-#### **🏛️ Nova Estrutura de Pastas:**
+#### **🏛️ New Folder Structure:**
 ```
 trading-mvp/
 ├── 📁 trading-intelligence/  # ML & AI Trading Backend
 ├── 📁 trading-executor/      # Real-Time Trading Executor (.NET)
 ├── 📁 trading-dashboard/   # Angular Frontend
-├── 📁 config/              # Configurações
+├── 📁 config/              # Configurations
 └── 📁 tests/               # Test Suite
 ```
 
-### **✅ Benefícios Alcançados:**
+### **✅ Benefits Achieved:**
 
-1. **📖 Clareza de Domínio:**
-   - Nome `trading-executor` expressa claramente a funcionalidade
-   - Segue convenções de nomenclatura com hífen e minúsculas
-   - Alinha com `trading-dashboard` para consistência
+1. **📖 Domain Clarity:**
+   - Name `trading-executor` clearly expresses functionality
+   - Follows naming conventions with hyphen and lowercase
+   - Aligns with `trading-dashboard` for consistency
 
-2. **🧹 Organização Melhorada:**
-   - Estrutura mais limpa e profissional
-   - Facilita navegação para novos desenvolvedores
-   - Reduz confusão sobre tecnologias vs funcionalidades
+2. **🧹 Improved Organization:**
+   - Cleaner and more professional structure
+   - Facilitates navigation for new developers
+   - Reduces confusion about technologies vs functionalities
 
-3. **📚 Documentação Consistente:**
-   - Todas as referências atualizadas
-   - Scripts funcionando corretamente
-   - Guias de setup sincronizados
+3. **📚 Consistent Documentation:**
+   - All references updated
+   - Scripts working correctly
+   - Setup guides synchronized
 
-4. **🔧 Build System Atualizado:**
-   - Solution Visual Studio corrigida
-   - Scripts de automação funcionais
-   - Testes de integração atualizados
+4. **🔧 Updated Build System:**
+   - Visual Studio Solution corrected
+   - Functional automation scripts
+   - Updated integration tests
 
-### **🎯 Próximos Passos:**
-- Validar que todos os scripts funcionam corretamente
-- Testar build e execução completa
-- Verificar integrações com CI/CD se aplicável
+### **🎯 Next Steps:**
+- Validate that all scripts work correctly
+- Test complete build and execution
+- Verify integrations with CI/CD if applicable
 
-### **📊 Impacto:**
-- **Mudanças**: 8 arquivos atualizados
-- **Compatibilidade**: Mantida (apenas mudança de pasta)
-- **Breaking Changes**: Nenhuma (somente estrutura)
-- **Documentação**: 100% atualizada
+### **📊 Impact:**
+- **Changes**: 8 files updated
+- **Compatibility**: Maintained (folder change only)
+- **Breaking Changes**: None (structure only)
+- **Documentation**: 100% updated
 
 ---
-**🎉 Refatoração concluída com sucesso! Estrutura agora reflete o domínio da aplicação.**
+**🎉 Refactoring completed successfully! Structure now reflects the application domain.**

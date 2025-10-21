@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """
-Verificação da Nova Estrutura - Trading MVP
+New Structure Verification - Trading MVP
 """
 
 def show_new_structure():
     print("=" * 70)
-    print("🎉 REORGANIZAÇÃO ESTRUTURAL CONCLUÍDA COM SUCESSO!")
+    print("🎉 STRUCTURAL REORGANIZATION COMPLETED SUCCESSFULLY!")
     print("=" * 70)
     
-    print("\n📁 NOVA ESTRUTURA DE PASTAS:")
+    print("\n📁 NEW FOLDER STRUCTURE:")
     print("""
 trading-mvp/
 ├── 📁 trading-intelligence/    # 🧠 Clean Architecture Python Backend
@@ -29,37 +29,37 @@ trading-mvp/
 └── 📁 tests/                   # 🧪 Test Suite
     """)
     
-    print("🔄 MUDANÇAS REALIZADAS:")
-    print("   ❌ ANTES: python/ e dotnet/TradingExecutor/")
-    print("   ✅ DEPOIS: trading-intelligence/ e trading-executor/")
+    print("🔄 CHANGES MADE:")
+    print("   ❌ BEFORE: python/ and dotnet/TradingExecutor/")
+    print("   ✅ AFTER: trading-intelligence/ and trading-executor/")
     print()
-    print("🎯 BENEFÍCIOS ALCANÇADOS:")
-    print("   ✅ Nome reflete a funcionalidade do domínio")
-    print("   ✅ Estrutura mais limpa e profissional")
-    print("   ✅ Facilita navegação para novos desenvolvedores")
-    print("   ✅ Remove confusão entre tecnologia e funcionalidade")
-    print("   ✅ Alinha com princípios de Domain-Driven Design")
+    print("🎯 BENEFITS ACHIEVED:")
+    print("   ✅ Name reflects domain functionality")
+    print("   ✅ Cleaner and more professional structure")
+    print("   ✅ Easier navigation for new developers")
+    print("   ✅ Removes confusion between technology and functionality")
+    print("   ✅ Aligns with Domain-Driven Design principles")
     
-    print("\n📝 ARQUIVOS ATUALIZADOS:")
-    print("   ✅ README.md - Documentação completa")
-    print("   ✅ setup.sh/setup.py - Scripts de build")
-    print("   ✅ SETUP_GUIDE.md - Guia de instalação") 
-    print("   ✅ test_complete_system.py - Testes de integração")
-    print("   ✅ .gitignore - Regras de exclusão")
-    print("   ✅ trading-mvp.sln - Solution Visual Studio")
+    print("\n📝 UPDATED FILES:")
+    print("   ✅ README.md - Complete documentation")
+    print("   ✅ setup.sh/setup.py - Build scripts")
+    print("   ✅ SETUP_GUIDE.md - Installation guide") 
+    print("   ✅ test_complete_system.py - Integration tests")
+    print("   ✅ .gitignore - Exclusion rules")
+    print("   ✅ trading-mvp.sln - Visual Studio Solution")
     
-    print("\n🚀 COMO USAR AGORA:")
-    print("   1. API Python:")
+    print("\n🚀 HOW TO USE NOW:")
+    print("   1. Python API:")
     print("      cd trading-intelligence && python app/simple_realtime.py")
     print()
     print("   2. Trading Executor:")
     print("      cd trading-executor && dotnet run")
     print()
-    print("   3. Dashboard Angular:")
+    print("   3. Angular Dashboard:")
     print("      cd trading-dashboard && npm start")
     
     print("\n" + "=" * 70)
-    print("🏛️ CLEAN ARCHITECTURE MANTIDA!")
+    print("🏛️ CLEAN ARCHITECTURE MAINTAINED!")
     print("📦 Domain ➜ ⚙️ Application ➜ 🏗️ Infrastructure ➜ 🖥️ Presentation")
     print("=" * 70)
 
