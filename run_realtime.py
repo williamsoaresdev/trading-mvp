@@ -58,11 +58,11 @@ class ServiceOrchestrator:
         
         return True
     
-    def start_python_api(self):
-        """Start Python FastAPI with WebSocket support"""
-        self.log("API", "Starting real-time Python API...")
+    def start_intelligence_api(self):
+        """Start Trading Intelligence FastAPI with WebSocket support"""
+        self.log("API", "Starting real-time Trading Intelligence API...")
         
-        python_dir = self.base_dir / "python"
+        python_dir = self.base_dir / "trading-intelligence"
         
         # Determine activation command
         if platform.system() == "Windows":
@@ -125,7 +125,7 @@ class ServiceOrchestrator:
         """Start .NET trading executor"""
         self.log("EXECUTOR", "Starting .NET trading executor...")
         
-        executor_dir = self.base_dir / "dotnet" / "TradingExecutor"
+        executor_dir = self.base_dir / "trading-executor"
         
         process = subprocess.Popen(
             ["dotnet", "run"],
@@ -227,8 +227,8 @@ class ServiceOrchestrator:
             self.log("SYSTEM", "🚀 Starting Real-Time Trading System")
             print("=" * 60)
             
-            # 1. Start Python API
-            self.start_python_api()
+            # 1. Start Trading Intelligence API
+            self.start_intelligence_api()
             
             # 2. Wait for API to be ready
             if not self.wait_for_api():

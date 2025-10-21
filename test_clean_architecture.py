@@ -8,7 +8,7 @@ import os
 from pathlib import Path
 
 # Add paths
-sys.path.insert(0, str(Path(__file__).parent / "python"))
+sys.path.insert(0, str(Path(__file__).parent / "trading-intelligence"))
 
 async def test_clean_architecture():
     """Test the clean architecture components."""
@@ -18,14 +18,14 @@ async def test_clean_architecture():
     try:
         # Test imports
         print("Testing imports...")
-        from python.app.domain.entities.trading_decision import TradingDecision
-        from python.app.domain.value_objects.trading_action import TradingAction
-        from python.app.domain.value_objects.symbol import TradingSymbol
-        from python.app.domain.value_objects.money import Money
-        from python.app.domain.value_objects.percentage import Percentage
-        from python.app.application.use_cases.generate_trading_decision import GenerateTradingDecisionUseCase
-        from python.app.infrastructure.repositories.in_memory_decision_repository import InMemoryTradingDecisionRepository
-        from python.app.infrastructure.ml.ml_prediction_service import MLPredictionService
+        from app.domain.entities.trading_decision import TradingDecision
+        from app.domain.value_objects.trading_action import TradingAction
+        from app.domain.value_objects.symbol import TradingSymbol
+        from app.domain.value_objects.money import Money
+        from app.domain.value_objects.percentage import Percentage
+        from app.application.use_cases.generate_trading_decision import GenerateTradingDecisionUseCase
+        from app.infrastructure.repositories.in_memory_decision_repository import InMemoryTradingDecisionRepository
+        from app.infrastructure.ml.ml_prediction_service import MLPredictionService
         print("✅ All imports successful!")
         
         # Test Value Objects
@@ -57,8 +57,8 @@ async def test_clean_architecture():
         
         # Test Use Case
         print("\nTesting Use Case...")
-        from python.app.infrastructure.external.ccxt_market_data import CCXTMarketDataRepository
-        from python.app.application.use_cases.generate_trading_decision import GenerateTradingDecisionRequest
+        from app.infrastructure.external.ccxt_market_data import CCXTMarketDataRepository
+        from app.application.use_cases.generate_trading_decision import GenerateTradingDecisionRequest
         
         # Mock market data repo for testing
         class MockMarketDataRepository:

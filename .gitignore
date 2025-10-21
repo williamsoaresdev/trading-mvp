@@ -129,6 +129,17 @@ env.bak/
 venv.bak/
 trading-intelligence/.venv/
 
+# Security - API Keys and Certificates
+*.key
+*.pem
+*.p12
+*.pfx
+config/*.key
+config/*.pem
+*.secret
+api_keys.json
+credentials.json
+
 # Spyder project settings
 .spyderproject
 .spyproject

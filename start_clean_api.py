@@ -8,7 +8,7 @@ from pathlib import Path
 import uvicorn
 
 # Add the app directory to Python path
-sys.path.insert(0, str(Path(__file__).parent / "python"))
+sys.path.insert(0, str(Path(__file__).parent / "trading-intelligence"))
 
 if __name__ == "__main__":
     print("🚀 Starting Clean Real-Time Trading API")
@@ -20,7 +20,7 @@ if __name__ == "__main__":
     
     try:
         uvicorn.run(
-            "python.app.presentation.clean_api:app",
+            "app.presentation.clean_api:app",
             host="0.0.0.0",
             port=8000,
             reload=True,
