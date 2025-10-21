@@ -40,7 +40,27 @@ Este MVP implementa um pipeline completo para robô de trading automatizado com 
 
 ## Quick Start
 
-### Option 1: Automated Setup (Recommended)
+### Option 1: **Real-Time Mode** (Recommended) 🔥
+
+Start all services simultaneously with WebSocket streaming:
+
+```bash
+python run_realtime.py
+```
+
+This will:
+- ✅ Start Python API with WebSocket support
+- ✅ Enable real-time trading decisions (every 30 seconds)
+- ✅ Launch Angular dashboard with live updates
+- ✅ Start .NET executor with WebSocket connection
+- ✅ Provide real-time monitoring and logging
+
+**Access URLs:**
+- Dashboard: http://localhost:4200 (live updates)
+- API: http://localhost:8000
+- WebSocket: ws://localhost:8000/ws
+
+### Option 2: Automated Setup (First Time)
 
 **Windows:**
 ```cmd
@@ -58,7 +78,7 @@ chmod +x setup.sh
 python setup.py
 ```
 
-### Option 2: Manual Setup
+### Option 3: Manual Setup
 
 1. **Setup Environment** (first time only):
 ```bash
