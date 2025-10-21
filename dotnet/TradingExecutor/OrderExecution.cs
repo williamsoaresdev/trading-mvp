@@ -1,22 +1,25 @@
 using System.Net.Http.Json;
+using TradingExecutor.Domain.Interfaces;
+using TradingExecutor.Domain.Models;
 
-public interface IOrderExecutor
+// Legacy interface for backward compatibility
+public interface ILegacyOrderExecutor
 {
     Task PlaceBuyAsync(string symbol, decimal qty);
     Task PlaceSellAsync(string symbol, decimal qty);
 }
 
-public sealed class MockOrderExecutor : IOrderExecutor
+public sealed class LegacyMockOrderExecutor : ILegacyOrderExecutor
 {
     public Task PlaceBuyAsync(string symbol, decimal qty)
     {
-        Console.WriteLine($"[MOCK BUY] {symbol} qty={qty}");
+        Console.WriteLine($"[LEGACY MOCK BUY] {symbol} qty={qty}");
         return Task.CompletedTask;
     }
 
     public Task PlaceSellAsync(string symbol, decimal qty)
     {
-        Console.WriteLine($"[MOCK SELL] {symbol} qty={qty}");
+        Console.WriteLine($"[LEGACY MOCK SELL] {symbol} qty={qty}");
         return Task.CompletedTask;
     }
 }
