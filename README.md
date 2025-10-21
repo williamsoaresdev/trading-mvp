@@ -128,7 +128,7 @@ presentation/
 
 ### **.NET** (Clean Architecture Implementation)
 
-#### **📦 Domain Layer** (`TradingExecutor/Domain/`)
+#### **📦 Domain Layer** (`trading-executor/Domain/`)
 ```csharp
 // Domain Models (Records imutáveis)
 public record TradingDecision(Symbol Symbol, TradingAction Action, decimal Confidence);
@@ -139,7 +139,7 @@ public record Symbol(string Value);
 public record Money(decimal Amount, string Currency);
 ```
 
-#### **⚙️ Application Layer** (`TradingExecutor/Application/`)
+#### **⚙️ Application Layer** (`trading-executor/Application/`)
 ```csharp
 // Application Services
 public interface ITradingApplicationService
@@ -155,7 +155,7 @@ public class ExecuteTradingDecisionUseCase
 }
 ```
 
-#### **🏗️ Infrastructure Layer** (`TradingExecutor/Infrastructure/`)
+#### **🏗️ Infrastructure Layer** (`trading-executor/Infrastructure/`)
 ```csharp
 // WebSocket Client
 public class WebSocketTradingClient : ITradingDataSource
@@ -198,7 +198,7 @@ python app/simple_realtime.py
 
 **2. Inicie o Executor .NET (Terminal 2):**
 ```bash
-cd TradingExecutor
+cd trading-executor
 dotnet run
 ```
 
@@ -276,7 +276,7 @@ npm start
 
 Terminal 3 - .NET Trading Executor:
 ```bash
-cd TradingExecutor
+cd trading-executor
 dotnet run
 ```
 
@@ -369,7 +369,7 @@ trading-mvp/
 │   ├── 📁 artifacts/                   # Modelo treinado (git ignored)
 │   ├── requirements.txt                # Dependências Python
 │   └── run_server.py                  # Script para subir API
-├── 📁 TradingExecutor/                   # Clean Architecture .NET Backend
+├── 📁 trading-executor/                 # Clean Architecture .NET Backend
 │   ├── 📁 Domain/                      # 📦 DOMAIN LAYER
 │   │   ├── Models/                        # Domain models (records)
 │   │   ├── ValueObjects/                  # Value objects
@@ -519,7 +519,7 @@ pip install -r requirements.txt --force-reinstall
 curl http://localhost:8000/trading/status
 
 # Restart com logs detalhados
-cd TradingExecutor
+cd trading-executor
 dotnet run --verbosity detailed
 ```
 

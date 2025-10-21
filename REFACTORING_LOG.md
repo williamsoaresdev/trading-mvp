@@ -12,7 +12,7 @@ Organizar a estrutura de pastas com nomes que fazem sentido para o domínio da a
 #### **📁 Renomeação de Pastas:**
 ```diff
 - dotnet/TradingExecutor/     # ❌ Nome técnico genérico
-+ TradingExecutor/            # ✅ Nome que reflete a funcionalidade
++ trading-executor/           # ✅ Nome consistente com convenções
 ```
 
 #### **📝 Arquivos Atualizados:**
@@ -28,7 +28,7 @@ Organizar a estrutura de pastas com nomes que fazem sentido para o domínio da a
 ```
 trading-mvp/
 ├── 📁 python/              # ML & Real-Time API Backend
-├── 📁 TradingExecutor/     # Real-Time Trading Executor (.NET)
+├── 📁 trading-executor/      # Real-Time Trading Executor (.NET)
 ├── 📁 trading-dashboard/   # Angular Frontend
 ├── 📁 config/              # Configurações
 └── 📁 tests/               # Test Suite
@@ -37,9 +37,9 @@ trading-mvp/
 ### **✅ Benefícios Alcançados:**
 
 1. **📖 Clareza de Domínio:**
-   - Nome `TradingExecutor` expressa claramente a funcionalidade
-   - Remove referência técnica genérica `dotnet`
-   - Alinha com o namespace e classe principal
+   - Nome `trading-executor` expressa claramente a funcionalidade
+   - Segue convenções de nomenclatura com hífen e minúsculas
+   - Alinha com `trading-dashboard` para consistência
 
 2. **🧹 Organização Melhorada:**
    - Estrutura mais limpa e profissional

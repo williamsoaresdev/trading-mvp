@@ -111,7 +111,7 @@ def build_dotnet_project():
     """Build the .NET project"""
     print("🔨 Building .NET project...")
     
-    os.chdir("TradingExecutor")
+    os.chdir("trading-executor")
     
     success, output = run_command("dotnet build")
     if not success:
@@ -147,7 +147,7 @@ def print_next_steps():
         print("\n3. Start the Angular dashboard (new terminal):")
         print("   cd trading-dashboard && npm start")
         print("\n4. Start the .NET executor (new terminal):")
-        print("   cd TradingExecutor && dotnet run")
+        print("   cd trading-executor && dotnet run")
     
     print("\n🌐 Access URLs:")
     print("• Dashboard: http://localhost:4200")

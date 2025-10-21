@@ -36,7 +36,7 @@ async def test_complete_system():
         # Build first
         build_result = subprocess.run([
             "dotnet", "build"
-        ], cwd="TradingExecutor", capture_output=True, text=True, timeout=30)
+        ], cwd="trading-executor", capture_output=True, text=True, timeout=30)
         
         if build_result.returncode == 0:
             print("✅ .NET Build: PASSED")
