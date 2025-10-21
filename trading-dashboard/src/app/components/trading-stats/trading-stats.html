@@ -1,0 +1,42 @@
+<div class="trading-stats">
+  <h2>📊 Trading Statistics</h2>
+  
+  <div class="stats-container" *ngIf="stats$ | async as stats; else loading">
+    <div class="stat-card">
+      <div class="stat-header">Total Decisions</div>
+      <div class="stat-value">{{ stats.totalDecisions }}</div>
+    </div>
+    
+    <div class="stat-card buy">
+      <div class="stat-header">🟢 BUY</div>
+      <div class="stat-value">{{ stats.buyDecisions }}</div>
+      <div class="stat-percentage">{{ getBuyPercentage(stats) | number:'1.1-1' }}%</div>
+    </div>
+    
+    <div class="stat-card sell">
+      <div class="stat-header">🔴 SELL</div>
+      <div class="stat-value">{{ stats.sellDecisions }}</div>
+      <div class="stat-percentage">{{ getSellPercentage(stats) | number:'1.1-1' }}%</div>
+    </div>
+    
+    <div class="stat-card flat">
+      <div class="stat-header">⚪ FLAT</div>
+      <div class="stat-value">{{ stats.flatDecisions }}</div>
+      <div class="stat-percentage">{{ getFlatPercentage(stats) | number:'1.1-1' }}%</div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-header">Current Price</div>
+      <div class="stat-value">${{ stats.currentPrice | number:'1.2-2' }}</div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-header">Avg Confidence</div>
+      <div class="stat-value">{{ stats.averageProba | percent:'1.1-1' }}</div>
+    </div>
+  </div>
+  
+  <ng-template #loading>
+    <div class="loading">Loading trading stats...</div>
+  </ng-template>
+</div>

@@ -1,0 +1,24 @@
+<div class="dashboard">
+  <header class="dashboard-header">
+    <h1>🤖 Trading Bot Dashboard</h1>
+    <div class="header-info">
+      <div class="status-indicator" *ngIf="health$ | async as health">
+        <span class="status-dot" [class.online]="health.status === 'ok'"></span>
+        <span class="status-text">{{ health.status === 'ok' ? 'Online' : 'Offline' }}</span>
+      </div>
+      <div class="last-update">
+        Last Update: {{ lastUpdate | date:'HH:mm:ss' }}
+      </div>
+      <button class="refresh-btn" (click)="refreshData()">🔄 Refresh</button>
+    </div>
+  </header>
+
+  <div class="dashboard-content">
+    <app-trading-stats></app-trading-stats>
+    <app-decisions-table></app-decisions-table>
+  </div>
+
+  <footer class="dashboard-footer">
+    <p>Trading MVP - Real-time monitoring dashboard | Data updates every 30 seconds</p>
+  </footer>
+</div>

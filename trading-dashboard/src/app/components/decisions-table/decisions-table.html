@@ -1,0 +1,52 @@
+<div class="decisions-table">
+  <h2>📋 Recent Trading Decisions</h2>
+  
+  <div class="table-container" *ngIf="decisions$ | async as decisions; else loading">
+    <table class="decisions-table-element" *ngIf="decisions.length > 0; else noData">
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>Symbol</th>
+          <th>Decision</th>
+          <th>Price</th>
+          <th>Buy Prob</th>
+          <th>Sell Prob</th>
+          <th>Position %</th>
+          <th>ATR %</th>
+          <th>Confidence</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let decision of decisions; trackBy: trackByTimestamp">
+          <td>{{ decision.timestamp | date:'HH:mm:ss' }}</td>
+          <td>{{ decision.symbol }}</td>
+          <td [class]="getDecisionClass(decision.decision)">
+            {{ getDecisionIcon(decision.decision) }} {{ decision.decision }}
+          </td>
+          <td class="price">${{ decision.price | number:'1.2-2' }}</td>
+          <td class="probability">{{ decision.proba_buy | percent:'1.1-1' }}</td>
+          <td class="probability">{{ decision.proba_sell | percent:'1.1-1' }}</td>
+          <td class="position">{{ decision.position_fraction | percent:'1.1-1' }}</td>
+          <td class="atr">{{ decision.atr_pct | percent:'1.2-2' }}</td>
+          <td class="confidence">
+            <div class="confidence-bar">
+              <div 
+                class="confidence-fill" 
+                [style.width.%]="getConfidenceLevel(decision.proba_buy, decision.proba_sell) * 100">
+              </div>
+              <span class="confidence-text">{{ getConfidenceLevel(decision.proba_buy, decision.proba_sell) | percent:'1.0-0' }}</span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <ng-template #noData>
+      <div class="no-data">No trading decisions available yet.</div>
+    </ng-template>
+  </div>
+  
+  <ng-template #loading>
+    <div class="loading">Loading trading decisions...</div>
+  </ng-template>
+</div>

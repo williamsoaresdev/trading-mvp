@@ -1,0 +1,128 @@
+.decisions-table {
+  margin-bottom: 2rem;
+
+  h2 {
+    color: #333;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+}
+
+.table-container {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  overflow-x: auto;
+}
+
+.decisions-table-element {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+
+  th {
+    background: #f8f9fa;
+    padding: 1rem 0.5rem;
+    text-align: left;
+    font-weight: 600;
+    color: #495057;
+    border-bottom: 2px solid #dee2e6;
+    white-space: nowrap;
+  }
+
+  td {
+    padding: 0.75rem 0.5rem;
+    border-bottom: 1px solid #f1f3f4;
+    white-space: nowrap;
+    vertical-align: middle;
+  }
+
+  tr:hover {
+    background: #f8f9fa;
+  }
+}
+
+.decision-buy {
+  color: #28a745;
+  font-weight: 600;
+  background: #d4edda;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.decision-sell {
+  color: #dc3545;
+  font-weight: 600;
+  background: #f8d7da;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.decision-flat {
+  color: #6c757d;
+  font-weight: 600;
+  background: #e2e3e5;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.price {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.probability, .position, .atr {
+  text-align: center;
+  font-family: 'Courier New', monospace;
+}
+
+.confidence {
+  width: 120px;
+}
+
+.confidence-bar {
+  position: relative;
+  background: #e9ecef;
+  border-radius: 10px;
+  height: 20px;
+  overflow: hidden;
+}
+
+.confidence-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #28a745 0%, #ffc107 50%, #dc3545 100%);
+  transition: width 0.3s ease;
+}
+
+.confidence-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #333;
+  text-shadow: 0 0 3px rgba(255, 255, 255, 0.8);
+}
+
+.loading, .no-data {
+  text-align: center;
+  padding: 3rem;
+  color: #666;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .decisions-table-element {
+    font-size: 0.8rem;
+    
+    th, td {
+      padding: 0.5rem 0.25rem;
+    }
+  }
+  
+  .confidence {
+    width: 80px;
+  }
+}

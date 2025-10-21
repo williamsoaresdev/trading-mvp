@@ -1,0 +1,19 @@
+symbol: "BTC/USDT"
+timeframe: "1h"
+years: 2
+
+# Decision thresholds
+proba_buy_threshold: 0.58
+proba_sell_threshold: 0.58
+
+# Risk & sizing
+vol_target_annual: 0.20   # alvo de volatilidade anual do portfólio (20%)
+max_position_fraction: 0.30
+min_position_fraction: 0.02
+
+# Stops (em ATR)
+stop_atr_mult: 1.2
+take_atr_mult: 2.0
+
+# Circuit breakers
+daily_loss_limit_frac: 0.04
