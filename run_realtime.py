@@ -60,7 +60,8 @@ class ServiceOrchestrator:
     
     def start_python_api(self):
         """Start Python FastAPI with WebSocket support"""
-        self.log("API", "Starting real-time Python API...")\n        
+        self.log("API", "Starting real-time Python API...")
+        
         python_dir = self.base_dir / "python"
         
         # Determine activation command
