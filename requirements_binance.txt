@@ -1,0 +1,32 @@
+# Requirements for Binance Integration
+# Install with: pip install -r requirements_binance.txt
+
+# Core Binance libraries
+python-binance==1.0.19
+ccxt==4.1.65
+
+# Environment and configuration
+python-dotenv==1.0.0
+
+# Data handling
+pandas==2.1.4
+numpy==1.25.2
+
+# HTTP and networking
+requests==2.31.0
+websocket-client==1.6.4
+
+# Cryptography for API signatures
+cryptography==41.0.8
+
+# Async support
+aiohttp==3.9.1
+asyncio-throttle==1.0.2
+
+# Logging and monitoring
+structlog==23.2.0
+
+# Optional: For advanced features
+# matplotlib==3.8.2  # For plotting
+# ta==0.10.2         # Technical analysis
+# scikit-learn==1.3.2  # ML models

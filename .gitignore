@@ -140,6 +140,23 @@ config/*.pem
 api_keys.json
 credentials.json
 
+# Binance Integration Security
+.env
+.env.local
+.env.production
+binance_keys.json
+trading_config.secret
+*.api_key
+*.secret_key
+
+# Trading Data and Logs
+trading.db
+trading.log
+trading_history.csv
+positions.json
+trades_*.csv
+backtest_results/
+
 # Spyder project settings
 .spyderproject
 .spyproject
