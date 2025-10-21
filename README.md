@@ -5,62 +5,78 @@
 [![.NET](https://img.shields.io/badge/.NET-8.0+-purple.svg)](https://dotnet.microsoft.com/)
 [![Angular](https://img.shields.io/badge/Angular-20+-red.svg)](https://angular.io/)
 
-A complete algorithmic trading system featuring **machine learning predictions**, **REST API**, **trading execution engine**, and **real-time monitoring dashboard**.
+A complete **real-time algorithmic trading system** featuring **machine learning predictions**, **WebSocket streaming**, **automated trading execution**, and **live monitoring dashboard**.
 
-Este MVP implementa um pipeline completo para robô de trading automatizado com **machine learning**, **execução automática** e **dashboard de monitoramento em tempo real**.
+Este MVP implementa um pipeline completo para robô de trading automatizado com **machine learning**, **execução automática em tempo real**, **WebSocket para streaming de dados**, e **dashboard de monitoramento ao vivo**.
 
 ## 🏗️ Arquitetura
 
-### **Python** (Machine Learning & API)
+### **Python** (Machine Learning & Real-Time API)
 - `python/app/model_train.py`: coleta dados (Binance via ccxt), gera features (EMA, RSI, ATR), rotula com *triple barrier* simplificado, faz *walk-forward*, treina LightGBM e salva `model.pkl` + `feature_config.json`.
 - `python/app/service.py`: serviço **FastAPI** que carrega o modelo, puxa candles recentes, calcula features e retorna `BUY/SELL/FLAT` + tamanho de posição por *volatility targeting*.
+- `python/app/simple_realtime.py`: **serviço de trading em tempo real** com WebSocket broadcasting e decisões automatizadas a cada 30-60 segundos.
 - `python/app/utils.py`: utilitários (indicadores, rótulos, features).
 - `python/requirements.txt`: dependências Python.
 
-### **.NET** (Trading Executor)
-- `dotnet/TradingExecutor/Program.cs`: executor que consome FastAPI a cada barra, aplica *rulebook* (limiares, circuit breakers) e **mocka** ordens.
-- `dotnet/TradingExecutor/TradingExecutor.csproj`: projeto .NET 8.
-- `dotnet/TradingExecutor/OrderExecution.cs`: interface de execução, com *stub* de Binance para ordens reais.
+### **.NET** (Real-Time Trading Executor)
+- `dotnet/TradingExecutor/Program.cs`: executor que **conecta via WebSocket** ao serviço Python, recebe decisões em tempo real e executa ordens automaticamente.
+- `dotnet/TradingExecutor/RealTimeTradingExecutor.cs`: **cliente WebSocket** com fallback HTTP, aplica *risk management* e executa ordens com logging detalhado.
+- `dotnet/TradingExecutor/TradingExecutor.csproj`: projeto .NET 8+ com dependências WebSocket.
+- `dotnet/TradingExecutor/OrderExecution.cs`: interface de execução, com *mock orders* para testing seguro.
 
-### **Angular** (Dashboard Web)
-- `trading-dashboard/`: projeto Angular 20+ com dashboard responsivo
-- **Componentes**: estatísticas em tempo real, tabela de decisões, gráficos
-- **Serviços**: polling automático da API FastAPI a cada 30 segundos
-- **UI moderna**: gradientes, animações, códigos de cores para decisões
+### **Angular** (Live Dashboard)
+- `trading-dashboard/`: projeto Angular 20+ com **dashboard em tempo real**
+- **Componentes**: estatísticas ao vivo, tabela de decisões streaming, gráficos dinâmicos
+- **Serviços**: **WebSocket connection** para updates instantâneos + polling de backup
+- **UI moderna**: gradientes, animações, códigos de cores, indicadores de status de conexão
 
 ### **Config**
 - `config/config.yaml`: parâmetros (símbolo, timeframe, limiares, sizing, stops).
 
 ## 🚀 Pré-requisitos
 
-- **Python 3.10+** (idealmente 3.11)
-- **.NET 8 SDK** ou superior  
+- **Python 3.10+** (testado com Python 3.13)
+- **.NET 8 SDK** ou superior (testado com .NET 9.0)  
 - **Node.js 18+** e npm para o dashboard Angular
 - Conta/exchange para dados *live* (Binance — endpoints públicos bastam para dados; para ordens reais, inserir keys)
 
-## Quick Start
+## ⚡ Quick Start - Real-Time System
 
-### Option 1: **Real-Time Mode** (Recommended) 🔥
+### **🔥 Modo Recomendado: Sistema Completo em Tempo Real**
 
-Start all services simultaneously with WebSocket streaming:
-
+**1. Inicie a API Python (Terminal 1):**
 ```bash
-python run_realtime.py
+cd python
+python app/simple_realtime.py
 ```
 
-This will:
-- ✅ Start Python API with WebSocket support
-- ✅ Enable real-time trading decisions (every 30 seconds)
-- ✅ Launch Angular dashboard with live updates
-- ✅ Start .NET executor with WebSocket connection
-- ✅ Provide real-time monitoring and logging
+**2. Inicie o Executor .NET (Terminal 2):**
+```bash
+cd dotnet/TradingExecutor
+dotnet run
+```
 
-**Access URLs:**
-- Dashboard: http://localhost:4200 (live updates)
-- API: http://localhost:8000
-- WebSocket: ws://localhost:8000/ws
+**3. Inicie o Dashboard Angular (Terminal 3):**
+```bash
+cd trading-dashboard
+npm start
+```
 
-### Option 2: Automated Setup (First Time)
+### **🎯 O que acontece:**
+- ✅ **API Python**: Roda na porta 8000 com WebSocket
+- ✅ **Decisões automáticas**: A cada 30-60 segundos  
+- ✅ **Executor .NET**: Conecta via WebSocket e executa ordens
+- ✅ **Dashboard Angular**: Updates em tempo real na porta 4200
+- ✅ **WebSocket streaming**: Comunicação bidirecional entre serviços
+- ✅ **Logs detalhados**: Acompanhe cada decisão e execução
+
+### **🌐 URLs de Acesso:**
+- **Dashboard**: http://localhost:4200 (updates ao vivo)
+- **API Health**: http://localhost:8000/health  
+- **Trading Status**: http://localhost:8000/trading/status
+- **WebSocket**: ws://localhost:8000/ws
+
+### **🛠️ Setup Alternativo (Primeira Vez)**
 
 **Windows:**
 ```cmd
@@ -78,9 +94,9 @@ chmod +x setup.sh
 python setup.py
 ```
 
-### Option 3: Manual Setup
+### **📚 Setup Manual (Opcional)**
 
-1. **Setup Environment** (first time only):
+1. **Preparar Ambiente** (primeira vez):
 ```bash
 # Linux/macOS
 ./setup.sh
@@ -92,24 +108,18 @@ setup.bat
 python setup.py
 ```
 
-2. **Train the ML Model**:
+2. **Treinar Modelo ML** (primeira vez):
 ```bash
 cd python
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
 python app/model_train.py --symbol BTC/USDT --timeframe 1h --years 1
 ```
 
-3. **Start the Services**:
+3. **Modo Tradicional** (sem WebSocket):
 
 Terminal 1 - FastAPI Server:
 ```bash
-# Easy way (auto-activates virtual environment)
 python run_server.py
-
-# Manual way
-cd python
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-python -m uvicorn app.service:app --host 0.0.0.0 --port 8000 --reload
 ```
 
 Terminal 2 - Angular Dashboard:
@@ -124,57 +134,76 @@ cd dotnet/TradingExecutor
 dotnet run
 ```
 
-## 📊 **Dashboard Features**
+## 📊 **Dashboard Features - Real-Time**
 
-- **📈 Estatísticas em Tempo Real**
-  - Total de decisões (BUY/SELL/FLAT)  
-  - Percentuais de distribuição
-  - Preço atual do BTC
-  - Nível de confiança médio
+- **📈 Estatísticas Ao Vivo**
+  - Total de decisões (BUY/SELL/FLAT) em tempo real
+  - Percentuais de distribuição atualizados automaticamente
+  - Preço atual do BTC via WebSocket
+  - Nível de confiança médio das decisões
 
-- **📋 Tabela de Decisões**
-  - Últimas 100 decisões com timestamps
-  - Probabilidades de compra/venda  
-  - Barra de confiança visual
-  - Códigos de cores por tipo de decisão
+- **📋 Tabela de Decisões Streaming**
+  - Stream de decisões em tempo real via WebSocket
+  - Últimas 100 decisões com timestamps precisos
+  - Probabilidades de compra/venda instantâneas
+  - Barra de confiança visual dinâmica
+  - Status de execução das ordens
 
-- **🔄 Atualizações Automáticas**
-  - Polling da API a cada 30 segundos
-  - Indicador de status da conexão
-  - Botão de refresh manual
+- **🔄 Conectividade Tempo Real**
+  - **WebSocket connection** para updates instantâneos
+  - Indicador de status da conexão (Online/Offline)
+  - Fallback automático para polling HTTP
+  - Botão de reconexão manual
+  - Latência exibida em tempo real
 
-## 🌐 **URLs de Acesso**
+- **⚡ Monitoramento de Sistema**
+  - Status dos serviços (API, Executor, Dashboard)
+  - Número de conexões WebSocket ativas
+  - Indicadores de saúde do sistema
+  - Logs de execução em tempo real
 
-- **🖥️ Dashboard Angular**: http://localhost:4200
+## 🌐 **URLs de Acesso - Sistema Completo**
+
+- **🖥️ Dashboard Angular**: http://localhost:4200 (live updates via WebSocket)
 - **🔗 API FastAPI**: http://localhost:8000  
 - **📊 API Health**: http://localhost:8000/health
-- **🤖 API Predict**: http://localhost:8000/predict?symbol=BTC/USDT&timeframe=1h
+- **📈 Trading Status**: http://localhost:8000/trading/status
+- **📋 Trading History**: http://localhost:8000/trading/history
+- **🔌 WebSocket Endpoint**: ws://localhost:8000/ws
+- **🤖 Manual Prediction**: http://localhost:8000/predict?symbol=BTC/USDT&timeframe=1h
+- **▶️ Start Trading**: POST http://localhost:8000/trading/start
+- **⏹️ Stop Trading**: POST http://localhost:8000/trading/stop
 
 ## 📁 **Estrutura do Projeto**
 
 ```
 trading-mvp/
-├── 📁 python/                  # ML & API Backend
+├── 📁 python/                  # ML & Real-Time API Backend
 │   ├── 📁 app/
-│   │   ├── model_train.py      # Treinamento do modelo
-│   │   ├── service.py          # API FastAPI  
-│   │   └── utils.py            # Utilitários
+│   │   ├── model_train.py      # Treinamento do modelo ML
+│   │   ├── service.py          # API FastAPI tradicional
+│   │   ├── simple_realtime.py  # 🔥 API Real-Time com WebSocket
+│   │   └── utils.py            # Utilitários e indicadores
 │   ├── 📁 artifacts/           # Modelo treinado (git ignored)
 │   ├── requirements.txt        # Dependências Python
-│   └── run_server.py          # Script para subir API
-├── 📁 dotnet/                  # Trading Executor
+│   └── run_server.py          # Script para subir API tradicional
+├── 📁 dotnet/                  # Real-Time Trading Executor
 │   └── 📁 TradingExecutor/
 │       ├── Program.cs          # Executor principal
+│       ├── RealTimeTradingExecutor.cs  # 🔥 Cliente WebSocket
 │       ├── OrderExecution.cs   # Interface de ordens
-│       └── *.csproj           # Projeto .NET
-├── 📁 trading-dashboard/       # Dashboard Angular
+│       └── *.csproj           # Projeto .NET com WebSocket
+├── 📁 trading-dashboard/       # Live Dashboard Angular
 │   ├── 📁 src/app/
-│   │   ├── 📁 components/      # Componentes UI
-│   │   ├── 📁 services/        # Serviços API
+│   │   ├── 📁 components/      # Componentes UI em tempo real
+│   │   ├── 📁 services/        # 🔥 WebSocket + HTTP services
 │   │   └── 📁 models/          # Interfaces TypeScript
 │   └── package.json           # Dependências NPM
 ├── 📁 config/                 # Configurações
 │   └── config.yaml            # Parâmetros de trading
+├── run_realtime.py            # 🔥 Script para sistema completo
+├── start_api.py               # Script simplificado para API
+├── setup.bat / setup.sh       # Scripts de instalação
 ├── .gitignore                 # Arquivos ignorados
 └── README.md                  # Esta documentação
 ```
@@ -227,47 +256,103 @@ daily_loss_limit_frac: 0.04    # 4% perda diária máxima
 
 ## 🔧 **Troubleshooting**
 
-### **Python: ModuleNotFoundError**
+### **🔌 WebSocket: Connection Issues**
+```bash
+# Verificar se API está rodando com WebSocket
+curl http://localhost:8000/health
+
+# Testar WebSocket diretamente  
+wscat -c ws://localhost:8000/ws
+
+# Verificar portas em uso
+netstat -an | findstr :8000
+```
+
+### **🐍 Python: ModuleNotFoundError**
 ```bash
 # Certificar que venv está ativo
 which python  # deve apontar para .venv
 
-# Reinstalar dependências
+# Para Python 3.13+ (dependências flexíveis)
 pip install -r requirements.txt --force-reinstall
 ```
 
-### **.NET: Connection refused**
+### **⚡ .NET: Connection refused**
 ```bash
 # Verificar se FastAPI está rodando
-curl http://localhost:8000/health
+curl http://localhost:8000/trading/status
 
-# Verificar porta em uso
-netstat -an | grep 8000
+# Restart com logs detalhados
+cd dotnet/TradingExecutor
+dotnet run --verbosity detailed
 ```
 
-### **Angular: Build errors**
+### **🅰️ Angular: Build errors**
 ```bash
 # Limpar cache e reinstalar
 rm -rf node_modules package-lock.json
 npm install
+
+# Verificar versões
+node --version  # deve ser 18+
+npm --version
+```
+
+### **🔄 Sistema Completo: Services não comunicam**
+```bash
+# 1. Verificar ordem de inicialização:
+# Primeiro: Python API (porta 8000)
+# Segundo: .NET Executor (conecta via WebSocket)  
+# Terceiro: Angular Dashboard (porta 4200)
+
+# 2. Verificar conectividade
+curl http://localhost:8000/trading/status
+curl http://localhost:4200
+
+# 3. Logs detalhados em cada terminal
+# Python: logs automáticos no console
+# .NET: logs automáticos no console  
+# Angular: F12 > Console para logs do browser
 ```
 
 ## 🚀 **Roadmap & Melhorias**
 
-### **🎯 Próximas features**
-- [ ] WebSocket para atualizações em tempo real
-- [ ] Gráficos avançados com Chart.js  
-- [ ] Histórico detalhado com filtros
-- [ ] Alertas para decisões importantes
-- [ ] Métricas de performance avançadas
-- [ ] Suporte a múltiplos símbolos
-- [ ] Estratégias ensemble
+### **✅ Recursos Implementados**
+- [x] **Sistema de Trading em Tempo Real** com WebSocket
+- [x] **Conectividade bidirecional** entre todos os serviços
+- [x] **Dashboard responsivo** com updates instantâneos
+- [x] **Executor .NET** com cliente WebSocket robusto
+- [x] **Risk management** integrado com circuit breakers
+- [x] **Logs detalhados** para monitoramento completo
+- [x] **Fallback automático** HTTP quando WebSocket falha
+- [x] **Mock orders** para testing seguro
+- [x] **Status monitoring** em tempo real
 
-### **📊 Analytics sugeridas**
-- [ ] Heatmap de performance por hora/dia
-- [ ] Correlação entre volatilidade e accuracy  
-- [ ] Backtest com dados out-of-sample
-- [ ] Monte Carlo para stress testing
+### **🎯 Próximas Features**
+- [ ] **Gráficos avançados** com Chart.js em tempo real
+- [ ] **Múltiplos símbolos** simultâneos (BTC, ETH, etc)
+- [ ] **Alertas push** para decisões importantes
+- [ ] **Histórico persistente** com base de dados
+- [ ] **Backtesting avançado** com métricas detalhadas
+- [ ] **API de configuração** dinâmica via dashboard
+- [ ] **Estratégias ensemble** com múltiplos modelos
+- [ ] **Mobile app** para monitoramento remoto
+
+### **📊 Analytics Planejadas**
+- [ ] **Heatmap de performance** por hora/dia/semana
+- [ ] **Correlação** entre volatilidade e accuracy  
+- [ ] **Métricas de Sharpe** e maximum drawdown
+- [ ] **Monte Carlo** para stress testing
+- [ ] **A/B testing** de diferentes estratégias
+- [ ] **Machine learning** para otimização de parâmetros
+
+### **🔒 Segurança & Produção**
+- [ ] **Rate limiting** para API endpoints
+- [ ] **Autenticação JWT** para dashboard
+- [ ] **SSL/TLS** para conexões seguras
+- [ ] **Kubernetes deployment** para escalabilidade
+- [ ] **Monitoring avançado** com Prometheus/Grafana
+- [ ] **Backup automático** de decisões e logs
 
 ## 🤝 **Contribuição**
 
@@ -283,4 +368,6 @@ Este projeto está sob licença MIT. Veja o arquivo `LICENSE` para mais detalhes
 
 ---
 
-**⚠️ DISCLAIMER**: Este é um projeto educacional. Trading automatizado envolve riscos financeiros significativos. Use apenas capital que você pode perder. Não somos responsáveis por perdas financeiras.
+**⚠️ DISCLAIMER**: Este é um projeto educacional com foco em **real-time systems** e **WebSocket streaming**. Trading automatizado envolve riscos financeiros significativos. Use apenas capital que você pode perder. O sistema atual utiliza **mock orders** para segurança. Não somos responsáveis por perdas financeiras.
+
+**🔥 DESTAQUE**: Sistema completo de **trading em tempo real** com **comunicação WebSocket** entre Python, .NET e Angular - **testado e funcionando!**
