@@ -99,7 +99,7 @@ cd ..
 
 # Build .NET project
 print_status "Building .NET project..."
-cd dotnet/TradingExecutor
+cd TradingExecutor
 
 dotnet build
 if [ $? -eq 0 ]; then
@@ -127,7 +127,7 @@ echo "3. Start the Angular dashboard (new terminal):"
 echo "   cd trading-dashboard && npm start"
 echo ""
 echo "4. Start the .NET executor (new terminal):"
-echo "   cd dotnet/TradingExecutor && dotnet run"
+echo "   cd TradingExecutor && dotnet run"
 echo ""
 echo -e "${GREEN}🌐 Access URLs:${NC}"
 echo "• Dashboard: http://localhost:4200"

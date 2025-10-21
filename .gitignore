@@ -163,8 +163,8 @@ cython_debug/
 python/artifacts/
 
 # .NET Core
-dotnet/TradingExecutor/bin/
-dotnet/TradingExecutor/obj/
+TradingExecutor/bin/
+TradingExecutor/obj/
 *.swp
 *.swo
 

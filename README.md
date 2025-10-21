@@ -128,7 +128,7 @@ presentation/
 
 ### **.NET** (Clean Architecture Implementation)
 
-#### **📦 Domain Layer** (`dotnet/TradingExecutor/Domain/`)
+#### **📦 Domain Layer** (`TradingExecutor/Domain/`)
 ```csharp
 // Domain Models (Records imutáveis)
 public record TradingDecision(Symbol Symbol, TradingAction Action, decimal Confidence);
@@ -139,7 +139,7 @@ public record Symbol(string Value);
 public record Money(decimal Amount, string Currency);
 ```
 
-#### **⚙️ Application Layer** (`dotnet/TradingExecutor/Application/`)
+#### **⚙️ Application Layer** (`TradingExecutor/Application/`)
 ```csharp
 // Application Services
 public interface ITradingApplicationService
@@ -155,7 +155,7 @@ public class ExecuteTradingDecisionUseCase
 }
 ```
 
-#### **🏗️ Infrastructure Layer** (`dotnet/TradingExecutor/Infrastructure/`)
+#### **🏗️ Infrastructure Layer** (`TradingExecutor/Infrastructure/`)
 ```csharp
 // WebSocket Client
 public class WebSocketTradingClient : ITradingDataSource
@@ -198,7 +198,7 @@ python app/simple_realtime.py
 
 **2. Inicie o Executor .NET (Terminal 2):**
 ```bash
-cd dotnet/TradingExecutor
+cd TradingExecutor
 dotnet run
 ```
 
@@ -276,7 +276,7 @@ npm start
 
 Terminal 3 - .NET Trading Executor:
 ```bash
-cd dotnet/TradingExecutor
+cd TradingExecutor
 dotnet run
 ```
 
@@ -369,24 +369,23 @@ trading-mvp/
 │   ├── 📁 artifacts/                   # Modelo treinado (git ignored)
 │   ├── requirements.txt                # Dependências Python
 │   └── run_server.py                  # Script para subir API
-├── 📁 dotnet/                          # Clean Architecture .NET Backend
-│   └── 📁 TradingExecutor/
-│       ├── 📁 Domain/                  # 📦 DOMAIN LAYER
-│       │   ├── Models/                    # Domain models (records)
-│       │   ├── ValueObjects/              # Value objects
-│       │   └── Interfaces/                # Domain interfaces
-│       ├── 📁 Application/             # ⚙️ APPLICATION LAYER
-│       │   ├── Services/                  # Application services
-│       │   ├── UseCases/                  # Use cases
-│       │   └── Interfaces/                # Application interfaces
-│       ├── 📁 Infrastructure/          # 🏗️ INFRASTRUCTURE LAYER
-│       │   ├── WebSocket/                 # WebSocket client
-│       │   ├── OrderExecution/            # Order execution
-│       │   ├── RiskManagement/            # Risk management
-│       │   └── Logging/                   # Logging infrastructure
-│       ├── Program.cs                  # 🚀 Main entry point
-│       ├── OrderExecution.cs          # 📋 Order execution (legacy)
-│       └── *.csproj                   # Projeto .NET com DI
+├── 📁 TradingExecutor/                   # Clean Architecture .NET Backend
+│   ├── 📁 Domain/                      # 📦 DOMAIN LAYER
+│   │   ├── Models/                        # Domain models (records)
+│   │   ├── ValueObjects/                  # Value objects
+│   │   └── Interfaces/                    # Domain interfaces
+│   ├── 📁 Application/                 # ⚙️ APPLICATION LAYER
+│   │   ├── Services/                      # Application services
+│   │   ├── UseCases/                      # Use cases
+│   │   └── Interfaces/                    # Application interfaces
+│   ├── 📁 Infrastructure/              # 🏗️ INFRASTRUCTURE LAYER
+│   │   ├── WebSocket/                     # WebSocket client
+│   │   ├── OrderExecution/                # Order execution
+│   │   ├── RiskManagement/                # Risk management
+│   │   └── Logging/                       # Logging infrastructure
+│   ├── Program.cs                      # 🚀 Main entry point
+│   ├── OrderExecution.cs              # 📋 Order execution (legacy)
+│   └── *.csproj                       # Projeto .NET com DI
 ├── 📁 trading-dashboard/               # Angular Frontend (Clean Frontend)
 │   ├── 📁 src/app/
 │   │   ├── 📁 components/              # UI Components
@@ -520,7 +519,7 @@ pip install -r requirements.txt --force-reinstall
 curl http://localhost:8000/trading/status
 
 # Restart com logs detalhados
-cd dotnet/TradingExecutor
+cd TradingExecutor
 dotnet run --verbosity detailed
 ```
 
