@@ -64,14 +64,14 @@ def main():
     
     try:
         # Check if model exists
-        model_path = Path("python/model.pkl")
+        model_path = Path("trading-intelligence/model.pkl")
         if not model_path.exists():
             print("⚠️  ML model not found!")
             print("Train the model first:")
             if platform.system() == "Windows":
-                print("   cd python && .venv\\Scripts\\activate")
+                print("   cd trading-intelligence && .venv\\Scripts\\activate")
             else:
-                print("   cd python && source .venv/bin/activate")
+                print("   cd trading-intelligence && source .venv/bin/activate")
             print("   python app/model_train.py --symbol BTC/USDT --timeframe 1h --years 1")
             print("\nContinuing anyway (predictions will use dummy data)...\n")
         

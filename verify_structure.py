@@ -11,7 +11,7 @@ def show_new_structure():
     print("\n📁 NOVA ESTRUTURA DE PASTAS:")
     print("""
 trading-mvp/
-├── 📁 python/                  # 🐍 Clean Architecture Python Backend
+├── 📁 trading-intelligence/    # 🧠 Clean Architecture Python Backend
 │   ├── 📁 app/
 │   │   ├── 📁 domain/         # 📦 Domain Layer (Entities, Value Objects)
 │   │   ├── 📁 application/    # ⚙️ Application Layer (Use Cases)
@@ -30,8 +30,8 @@ trading-mvp/
     """)
     
     print("🔄 MUDANÇAS REALIZADAS:")
-    print("   ❌ ANTES: dotnet/TradingExecutor/")
-    print("   ✅ DEPOIS: trading-executor/")
+    print("   ❌ ANTES: python/ e dotnet/TradingExecutor/")
+    print("   ✅ DEPOIS: trading-intelligence/ e trading-executor/")
     print()
     print("🎯 BENEFÍCIOS ALCANÇADOS:")
     print("   ✅ Nome reflete a funcionalidade do domínio")
@@ -50,7 +50,7 @@ trading-mvp/
     
     print("\n🚀 COMO USAR AGORA:")
     print("   1. API Python:")
-    print("      cd python && python app/simple_realtime.py")
+    print("      cd trading-intelligence && python app/simple_realtime.py")
     print()
     print("   2. Trading Executor:")
     print("      cd trading-executor && dotnet run")

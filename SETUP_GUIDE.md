@@ -20,7 +20,7 @@ dotnet --version  # Deve ser 8.0+
 
 ### Passo 1: Navegar para o diretório Python
 ```bash
-cd python
+cd trading-intelligence
 ```
 
 ### Passo 2: Criar ambiente virtual

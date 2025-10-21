@@ -43,7 +43,7 @@ echo.
 
 REM Setup Python environment
 echo [INFO] Setting up Python environment...
-cd python
+cd trading-intelligence
 
 REM Create virtual environment
 if not exist ".venv" (
@@ -94,7 +94,7 @@ echo [SUCCESS] 🎉 Setup completed successfully!
 echo.
 echo 📋 Next steps:
 echo 1. Train the ML model:
-echo    cd python ^&^& .venv\Scripts\activate
+echo    cd trading-intelligence ^&^& .venv\Scripts\activate
 echo    python app/model_train.py --symbol BTC/USDT --timeframe 1h --years 1
 echo.
 echo 2. Start the FastAPI server:

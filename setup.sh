@@ -65,7 +65,7 @@ echo ""
 
 # Setup Python environment
 print_status "Setting up Python environment..."
-cd python
+cd trading-intelligence
 
 # Create virtual environment
 if [ ! -d ".venv" ]; then
@@ -117,7 +117,7 @@ print_success "🎉 Setup completed successfully!"
 echo ""
 echo -e "${BLUE}📋 Next steps:${NC}"
 echo "1. Train the ML model:"
-echo "   cd python && source .venv/bin/activate"  
+echo "   cd trading-intelligence && source .venv/bin/activate"  
 echo "   python app/model_train.py --symbol BTC/USDT --timeframe 1h --years 1"
 echo ""
 echo "2. Start the FastAPI server:"

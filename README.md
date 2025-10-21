@@ -74,7 +74,7 @@ O sistema foi completamente refatorado seguindo os princípios da **Clean Archit
 
 ### **Python** (Clean Architecture Implementation)
 
-#### **📦 Domain Layer** (`python/app/domain/`)
+#### **📦 Domain Layer** (`trading-intelligence/app/domain/`)
 ```
 domain/
 ├── entities/
@@ -90,7 +90,7 @@ domain/
     └── market_data_repository.py         # Interface de dados de mercado
 ```
 
-#### **⚙️ Application Layer** (`python/app/application/`)
+#### **⚙️ Application Layer** (`trading-intelligence/app/application/`)
 ```
 application/
 ├── use_cases/
@@ -101,7 +101,7 @@ application/
     └── clean_trading_service.py        # Serviço de aplicação principal
 ```
 
-#### **🏗️ Infrastructure Layer** (`python/app/infrastructure/`)
+#### **🏗️ Infrastructure Layer** (`trading-intelligence/app/infrastructure/`)
 ```
 infrastructure/
 ├── repositories/
@@ -114,7 +114,7 @@ infrastructure/
     └── file_system.py                      # Persistência em arquivo
 ```
 
-#### **🖥️ Presentation Layer** (`python/app/presentation/`)
+#### **🖥️ Presentation Layer** (`trading-intelligence/app/presentation/`)
 ```
 presentation/
 ├── api/
@@ -192,7 +192,7 @@ public class MockOrderExecutor : ITradingExecutor
 
 **1. Inicie a API Python (Terminal 1):**
 ```bash
-cd python
+cd trading-intelligence
 python app/simple_realtime.py
 ```
 
@@ -242,17 +242,9 @@ python setup.py
 
 ### **📚 Setup Manual (Opcional)**
 
-1. **Preparar Ambiente** (primeira vez):
+**Preparar Ambiente** (primeira vez):
 ```bash
-# Linux/macOS
-./setup.sh
-
-# Windows
-setup.bat
-
-# Cross-platform
-python setup.py
-```
+cd trading-intelligence
 
 2. **Treinar Modelo ML** (primeira vez):
 ```bash
@@ -324,7 +316,7 @@ dotnet run
 
 ```
 trading-mvp/
-├── 📁 python/                          # Clean Architecture Python Backend
+├── 📁 trading-intelligence/            # Clean Architecture Python Backend
 │   ├── 📁 app/
 │   │   ├── 📁 domain/                  # 📦 DOMAIN LAYER
 │   │   │   ├── 📁 entities/

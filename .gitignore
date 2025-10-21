@@ -127,7 +127,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-python/.venv/
+trading-intelligence/.venv/
 
 # Spyder project settings
 .spyderproject
@@ -160,7 +160,7 @@ cython_debug/
 #  .idea/
 
 # Python artifacts (trained models, configs)
-python/artifacts/
+trading-intelligence/artifacts/
 
 # .NET Core
 trading-executor/bin/

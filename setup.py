@@ -130,7 +130,7 @@ def print_next_steps():
     
     if platform.system() == "Windows":
         print("1. Train the ML model:")
-        print("   cd python && .venv\\Scripts\\activate")
+        print("   cd trading-intelligence && .venv\\Scripts\\activate")
         print("   python app/model_train.py --symbol BTC/USDT --timeframe 1h --years 1")
         print("\n2. Start the FastAPI server:")
         print("   python run_server.py")
@@ -140,7 +140,7 @@ def print_next_steps():
         print("   cd dotnet\\TradingExecutor && dotnet run")
     else:
         print("1. Train the ML model:")
-        print("   cd python && source .venv/bin/activate")
+        print("   cd trading-intelligence && source .venv/bin/activate")
         print("   python app/model_train.py --symbol BTC/USDT --timeframe 1h --years 1")
         print("\n2. Start the FastAPI server:")
         print("   python run_server.py")

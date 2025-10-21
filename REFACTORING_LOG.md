@@ -27,7 +27,7 @@ Organizar a estrutura de pastas com nomes que fazem sentido para o domínio da a
 #### **🏛️ Nova Estrutura de Pastas:**
 ```
 trading-mvp/
-├── 📁 python/              # ML & Real-Time API Backend
+├── 📁 trading-intelligence/  # ML & AI Trading Backend
 ├── 📁 trading-executor/      # Real-Time Trading Executor (.NET)
 ├── 📁 trading-dashboard/   # Angular Frontend
 ├── 📁 config/              # Configurações
